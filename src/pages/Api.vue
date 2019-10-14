@@ -2,11 +2,11 @@
     <Layout>
         <template slot="left">
             <div class="left-ct scrollbar">
-                <api-list v-if="apiPathList" :api-name="apiName" :api-list="apiPathList" :on-selected="onSelected"></api-list>
+                <api-list v-if="apiPathList" :api-name="apiName" :api-path-list="apiPathList" :api-info-list="apiInfoList"  :on-selected="onSelected"></api-list>
             </div>
         </template>
         <template slot="right">
-            <api-info v-if="apiName" v-bind:name.sync="apiName" :api-name="apiName" :api-info-list="apiInfoList"></api-info>
+            <api-info v-if="apiName" v-bind:name.sync="apiName" :api-name="apiName" :api-info-list="apiInfoList" @reload-apis="loadApiList"></api-info>
         </template>
     </Layout>
 </template>
@@ -36,34 +36,37 @@
                 for (let apiName in this.apiInfoList) {
                     if (!this.apiInfoList.hasOwnProperty(apiName)) continue;
                     this.apiName = apiName;
-                    return;
+                    break;
                 }
-            }
+            },
+            loadApiList() {
+                const apiListUrl = Configs.ApiListUrl();
+                Http.get(apiListUrl).then(response => {
+                    if (!response.data.isSuccess) {
+                        alert(response.data.message);
+                    } else {
+                        this.apiPathList = response.data.data.apiPathList;
+                        this.apiInfoList = response.data.data.apiInfoList;
+                        this.setDefaultApiName();
+                    }
+                });
+            },
         },
         created() {
-            const apiListUrl = Configs.ApiListUrl();
-            Http.get(apiListUrl).then(response => {
-                if (!response.data.isSuccess) {
-                    alert(response.data.message);
-                } else {
-                    this.apiPathList = response.data.data.apiPathList;
-                    this.apiInfoList = response.data.data.apiInfoList;
-                    this.setDefaultApiName();
-                }
-            });
+            this.loadApiList();
         },
     }
 </script>
 
 <style>
-    #layout-left > .block { padding: 18px 0; }
+    #layout-left > .block { padding: .5rem 0; }
 </style>
 
 <style scoped>
     .left-ct {
         box-sizing: border-box;
-        height: calc(100% - 20px);
-        margin: 10px 0;
+        height: calc(100% - 1rem);
+        margin: .5rem 0;
         overflow: hidden;
     }
     .left-ct:hover {

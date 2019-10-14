@@ -11,13 +11,13 @@ const resolve = dir => path.resolve(__dirname, dir);
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '/rest-api-manager/' : '/',
-    outputDir: 'dist',
+    outputDir: 'E:\\Website\\localhost\\rest-api-manager',//'dist',
     assetsDir: '',
     indexPath: 'index.html',
     filenameHashing: true,
     lintOnSave: true,
     // CSS 相关选项
-    css: {
+    /*css: {
         // 将组件内的 CSS 提取到一个单独的 CSS 文件 (只用在生产环境中)
         // 也可以是一个传递给 `extract-text-webpack-plugin` 的选项对象
         extract: true,
@@ -32,7 +32,7 @@ module.exports = {
         // 为所有的 CSS 及其预处理文件开启 CSS Modules。
         // 这个选项不会影响 `*.vue` 文件。
         modules: false
-    },
+    },*/
     parallel: require('os').cpus().length > 1,
     chainWebpack: config => {
         // 修复HMR

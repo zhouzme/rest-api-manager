@@ -14,58 +14,73 @@
     @import './assets/css/reset.css';
     html,body {
         height: 100%;
-        padding: 0;
-        margin: 0;
-        font-size: 12px;
         color: #333;
         background-color: #FFF;
     }
     #app {
         display: flex;
         flex-direction: column;
+        font-size: .6rem;
         height: 100%;
-        font-family: "Consolas", "Microsoft YaHei UI", "Courier New";
+
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
+    #app, .form-li .input.textarea {
+        font-family: "Consolas", "Microsoft YaHei UI", "Courier New";
+    }
     .form-ul {
-        width: 50%;
-        padding: 60px 50px;
+        width: 61.8%;
+        padding: 3rem 2.5rem;
     }
     .form-li {
         box-sizing: border-box;
         position: relative;
         display: block;
-        padding: 10px;
+        padding: .5rem;
         width: 100%;
         border: solid 1px #EEE;
-        margin-bottom: 50px;
+        margin-bottom: 2.5rem;
     }
     .form-li:not(.button-ct)::before {
         content: attr(data-name);
         position: absolute;
-        font-size: 14px;
+        font-size: .7rem;
+        white-space: nowrap;
         left: 0;
-        top: -22px;
+        top: -1.1rem;
         color: #999;
     }
-    .form-li.button-ct {
+    .form-li.button {
         border: none;
         padding: 0;
     }
-    .input {
+    .form-li .input {
         box-sizing: border-box;
         width: 100%;
         border: none;
+        background-color: transparent;
     }
-    .input.button {
+    .form-li.text {
+
+    }
+    .form-li.color {
+        max-width: 200px;
+    }
+    .form-li.textarea .input {
+        display: block;
+        min-height: 3rem;
+        resize: vertical;
+    }
+    .form-li.button .input {
         width: auto;
-        min-width: 80px;
-        height: 40px;
-        padding: 0 20px;
+        min-width: 4rem;
+        height: 2rem;
+        padding: 0 1rem;
         border: none;
         background-color: #3285ff;
         color: #FFF;
         cursor: pointer;
+        font-weight: bolder;
     }
 </style>

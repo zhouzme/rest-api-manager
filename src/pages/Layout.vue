@@ -5,13 +5,13 @@
                 <li class="item left-space">
                 </li><li class="item" :class="{curr: $route.name === 'Setting'}">
                     <router-link :to="{name: 'Setting'}">Setting</router-link>
-                </li><li class="item" :class="{curr: $route.name === 'Api'}">
-                    <router-link :to="{name: 'Api'}">Api</router-link>
+                </li><li class="item" :class="{curr: $route.name === 'API'}">
+                    <router-link :to="{name: 'API'}">API</router-link>
                 </li>
             </ul>
         </div>
         <div id="layout-body">
-            <div id="layout-left" class="scrollbar" ref="layoutLeft">
+            <div id="layout-left" class="scrollbar" ref="layoutLeft" :style="leftStyle">
                 <slot name="left"></slot>
             </div>
             <div id="layout-right" ref="layoutRight">
@@ -22,8 +22,26 @@
 </template>
 
 <script>
+    import Configs from '@/config'
     export default {
-        name: "Layout"
+        name: "Layout",
+        data() {
+            return {
+                leftStyle: {
+                    backgroundColor: '#F0F0F0',
+                }
+            };
+        },
+        methods: {
+            onLeftBgColorChange(color) {
+                console.log('onLeftBgColorChange',color)
+                this.leftStyle.backgroundColor = color;
+            }
+        },
+        created() {
+            const leftBackgroundColor = Configs.LeftBackgroundColor();
+            if (leftBackgroundColor) this.leftStyle.backgroundColor = leftBackgroundColor
+        },
     }
 </script>
 
@@ -35,8 +53,8 @@
         height: 100%;
     }
     #layout-head {
-        height: 50px;
-        max-height: 50px;
+        height: 2.5rem;
+        max-height: 2.5rem;
         background-color: #555;
     }
     #layout-head .navs {
@@ -48,15 +66,15 @@
     #layout-head .navs .item.left-space,
     #layout-left {
         width: 10%;
-        min-width: 250px;
-        max-width: 400px;
+        min-width: 10rem;
+        max-width: 60%
     }
     #layout-head .navs .item a {
         display: block;
-        font-size: 18px;
-        padding: 0 25px;
-        min-width: 125px;
-        line-height: 50px;
+        font-size: .9rem;
+        padding: 0 1.25rem;
+        min-width: 6.25rem;
+        line-height: 2.5rem;
         text-align: center;
         color: #FFF;
     }

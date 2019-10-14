@@ -1,13 +1,33 @@
 @charset "UTF-8";
 
 /* CSS Reset */
-* {padding:0;margin:0;}
-html { font-size: 20px; line-height: 1em; }
-ul,ol { list-style: none; padding: 0; margin: 0; }
-a,input,textarea,button,[contenteditable="true"]  { outline: none; -moz-outline-style: none; -webkit-tap-highlight-color:rgba(0,0,0,0); }
-fieldset {margin:0;padding:0;border:none;}
-a { text-decoration: none; }
-body { overflow-x: hidden; }
+* {
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    line-height: inherit;
+}
+html {
+    font-size: 20px;
+    line-height: 1em;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a, input, textarea, button, select, details, summary, [contenteditable="true"] {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+fieldset {
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
 
 .scrollbar::-webkit-scrollbar {
     width: .5rem;
@@ -15,11 +35,13 @@ body { overflow-x: hidden; }
     background-color: transparent;
     scroll-behavior: smooth;
 }
+
 .scrollbar::-webkit-scrollbar-thumb {
     border: solid .1rem #FFF;
     border-radius: .3rem;
     background-color: #999;
 }
+
 .scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: #555;
 }

@@ -20,7 +20,7 @@ const router = new Router({
         },
         {
             path: '/api',
-            name: 'Api',
+            name: 'API',
             component: ApiList,
             meta: {
                 noNeedRequiresAuth: true,
@@ -32,7 +32,7 @@ const router = new Router({
 
 router.beforeEach((to, from, next)=> {
     const pageTitle = to.meta.hasOwnProperty('title') ? to.meta.title + ' - ' : '';
-    document.title = pageTitle + 'REST-API Manager';
+    document.title = pageTitle + 'REST API Manager';
     // let goto = null;
     // if (!from && !to) goto = {name:'Setting'};
     next();

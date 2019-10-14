@@ -1,10 +1,11 @@
 <template>
-    <Layout>
+    <Layout ref="layout">
         <template slot="right">
         <ul class="form-ul">
-            <li class="form-li" data-name="API List URL"><input class="input text" type="text" v-model="apiListUrl" placeholder="API List URL" title=""></li>
-            <li class="form-li" data-name="API Request URL"><input class="input text" type="text" v-model="apiRequestUrl" placeholder="API Request URL" title=""></li>
-            <li class="form-li button-ct"><input class="input button submit" type="button" v-on:click="save" value="Save"></li>
+            <li class="form-li text" data-name="API List URL"><input class="input" type="text" v-model="apiListUrl" placeholder="API List URL" title=""></li>
+            <li class="form-li text" data-name="API Request URL"><input class="input" type="text" v-model="apiRequestUrl" placeholder="API Request URL" title=""></li>
+            <li class="form-li color" data-name="Left Background Color"><input class="input" type="color" v-model="leftBackgroundColor" placeholder="Left Background Color" title=""></li>
+            <li class="form-li button"><input class="input submit" type="button" @click="(e)=>onSave(e)" value="Save"><span class="result">{{result}}</span></li>
         </ul>
         </template>
     </Layout>
@@ -18,25 +19,39 @@
         components: {Layout},
         data() {
             return {
+                result: '',
                 apiListUrl: '',
                 apiRequestUrl: '',
+                leftBackgroundColor: '',
             };
         },
         created() {
             this.apiListUrl = Configs.ApiListUrl();
             this.apiRequestUrl = Configs.ApiRequestUrl();
+            this.leftBackgroundColor = Configs.LeftBackgroundColor();
         },
         methods: {
-            save() {
+            onSave() {
                 Configs.setApiListUrl(this.apiListUrl);
                 Configs.setApiRequestUrl(this.apiRequestUrl);
-                alert('保存成功')
+                Configs.setLeftBackgroundColor(this.leftBackgroundColor);
+                this.result = '保存成功';
             }
+        },
+        watch: {
+            leftBackgroundColor(n) {
+                this.$refs.layout.onLeftBgColorChange(n)
+                console.log('color', n)
+                this.$emit('left-bgcolor-change', n);
+            },
         }
     }
 </script>
 
 <style scoped>
     #layout-right-top, #layout-right-bottom { display: none; }
-
+    .result {
+        color: lightseagreen;
+        margin-left: 1rem;
+    }
 </style>

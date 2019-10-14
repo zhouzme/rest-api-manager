@@ -1,11 +1,14 @@
 <template>
-    <component :is="summary?'details':'div'" class="block" v-if="apiList" open>
+    <component :is="summary?'details':'div'" class="block" v-if="apiPathList" open>
         <summary class="summary" v-if="summary">{{summary}}</summary>
         <ul class="list">
-            <template v-for="(children, i) in apiList">
+            <template v-for="(children, i) in apiPathList">
                 <li :key="i" v-if="children && children !== true" :class="itemClass(children)">
-                    <span class="name" v-if="isApiName(children)" :class="children===apiName?'curr':''" v-on:click="onSelected(children)">{{children}}</span>
-                    <api-list v-else :api-list="children" :summary="i" :on-selected="onSelected" :api-name="apiName"></api-list>
+                    <span class="brief" v-if="isApiName(children)" :class="children===apiName?'curr':''"
+                          @click="onSelected(children)">{{apiInfoList[children].brief ? apiInfoList[children].brief : children}}<span
+                        class="name" v-if="apiInfoList[children].brief">{{children}}</span></span>
+                    <api-list v-else :api-path-list="children" :api-info-list="apiInfoList" :summary="i" :on-selected="onSelected"
+                              :api-name="apiName"></api-list>
                 </li>
             </template>
         </ul>
@@ -13,30 +16,26 @@
 </template>
 
 <script>
-    import lodash from 'lodash';
-
     export default {
         name: "ApiList",
         data() {
-            return {
-
-            };
+            return {};
         },
         methods: {
             itemClass(data) {
                 return this.isApiName(data) ? 'api' : 'path';
             },
             isApiName(data) {
-                return !lodash.isObject(data);
+                return typeof data === "string";
             },
         },
         created() {
-            this.$nextTick(function(){
-
-            });
         },
         props: {
-            apiList: {
+            apiPathList: {
+                required: true,
+            },
+            apiInfoList: {
                 required: true,
             },
             summary: String,
@@ -48,8 +47,8 @@
 
 <style scoped>
     .summary {
-        font-size: 12px;
-        line-height: 36px;
+        font-size: .6rem;
+        line-height: 1.8rem;
     }
 
     .path, .api {
@@ -57,34 +56,59 @@
     }
 
     .path {
-        font-size: 12px;
-        color: #999;
+        font-size: .6rem;
+        color: #CCC;
     }
 
     .api {
-        font-size: 14px;
+        font-size: .6rem;
         /*font-weight: bolder;*/
-        color: #999;
+        color: #AAA;
     }
 
-    .api .name {
+    .api .brief {
+        position: relative;
         display: block;
-        line-height: 36px;
+        line-height: 1.2rem;
         background-color: transparent;
         cursor: pointer;
     }
+
+    .api .name {
+        display: none;
+        margin-top: -8px;
+        padding-bottom: .5rem;
+        font-size: .6rem;
+        line-height: 1.2em;
+        color: #DDD;
+    }
+    .summary,
+    .api .brief,
+    .api .name {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
     .list {
-        padding-left: 20px;
+        padding-left: .5rem;
     }
+
     .list .summary {
-        padding-left: 0px;
+        padding-left: 0;
+        padding-bottom: 0;
     }
-    .list .api .name {
-        padding-left: 10px;
+
+    .list .api .brief {
+        padding-left: .5rem;
     }
-    .api .name.curr,
-    .api .name:hover {
-        color: #000;
+
+    .api .brief.curr {
+        line-height: 2rem;
+        color: #333;
         background-color: #FFF;
+    }
+    .api .brief:hover {
+        color: #333;
     }
 </style>
