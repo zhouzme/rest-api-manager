@@ -26,7 +26,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }
-    #app, .form-li .input.textarea {
+    #app, .form-li.textarea .input {
         font-family: "Consolas", "Microsoft YaHei UI", "Courier New";
     }
     .form-ul {
