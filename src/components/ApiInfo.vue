@@ -342,7 +342,7 @@
         flex: 1;
         height: 100%;
         margin: .5rem 0;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
     .tab-content {
         display: none;
