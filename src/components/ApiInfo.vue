@@ -3,7 +3,7 @@
         <div class="request-ct">
             <details v-show="!!getApiInfo.description || !!getApiInfo.brief" class="api-description">
                 <summary class="pointer"></summary>
-                <p class="description"><span v-show="!!getApiInfo.brief" class="name">{{getApiInfo.name}}</span>{{getApiInfo.description}}</p>
+                <p class="description"><span v-show="!!getApiInfo.brief" class="name">{{getApiInfo.name}}</span><span v-html="getApiInfo.description"></span></p>
             </details>
             <div class="title">
                 <ul class="tabs methods" title="Methods:">
@@ -15,14 +15,14 @@
             <details class="method-info-details" open>
                 <summary class="pointer"></summary>
                 <div v-show="!!getMethodUri" class="uri">{{getMethodUri}}</div>
-                <div v-show="!!getMethodDescription" class="description">{{getMethodDescription}}</div>
+                <div v-show="!!getMethodDescription" class="description" v-html="getMethodDescription"></div>
             </details>
             <div class="tab-content-ct scrollbar">
                 <ul class="tab-content form-ul" v-for="(data, i) in getApiInfo.methods" :class="i === method?'curr':''" :key="apiName +`-`+ i">
                     <li v-for="(loopParam,j) in data.params" :key="apiName +`-`+ i +`-`+ j" class="form-li" :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')" :title="loopParam.comment" :data-name="loopParam.name">
                         <textarea v-if="loopParam && loopParam.type && (loopParam.type.indexOf('textarea') !== -1)"
                                   class="input" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
-                                  :placeholder="loopParam.name +`:`+ loopParam.comment"></textarea>
+                                  :placeholder="loopParam.comment"></textarea>
                         <input v-else-if="loopParam && inputType(loopParam.type) === 'file'" @change="e=>params[loopParam.name]=e.target.files[0]" :required="isRequired(loopParam.type)"
                                class="input" type="file" :placeholder="loopParam.comment">
                         <input v-else-if="loopParam" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
@@ -77,12 +77,12 @@
                             <span v-show="response.data.hasOwnProperty('isSuccess')" class="icon"
                                   :class="response.data.isSuccess ? 'success':'failure'">
                                 <template v-if="response.data.code !== 0"> - {{response.data.code}}</template>
-                            </span>{{response.data.message}}
+                            </span><span v-html="response.data.message"></span>
                         </p>
                     </details>
                     <details v-show="!!response.data.description" open class="item">
                         <summary class="summary">Description</summary>
-                        <pre class="text pre-data">{{response.data.description}}</pre>
+                        <p class="text pre-data" v-html="response.data.description"></p>
                     </details>
                     <details class="item" open>
                         <summary class="summary">Data</summary>
@@ -141,8 +141,10 @@
                     for(let k in params) {
                         if (!params.hasOwnProperty(k)) continue;
                         let v = params[k];
+                        if (uri.indexOf('{' + k + '}') > -1) delete params[k];
                         uri = uri.replace('{' + k + '}', encodeURIComponent(v));
                     }
+                    uri = uri.replace(/\/+(\?|$)/, '/$1');
                 }
                 if (uri.indexOf('{') >= 0) {
                     this.resultTab = 'request';
