@@ -208,10 +208,11 @@
                         this.response.statusText = response.statusText;
                         this.response.header = response.header;
                         this.response.data = response.data;
-                        console.log(params);
                         // 执行全局回调处理
-                        if (lodash.isFunction(window.onRequestSuccess)) {
-                            window.onRequestSuccess(this, response);
+                        if (response.data.isSuccess) {
+                            if (lodash.isFunction(window.onRequestSuccess)) {
+                                window.onRequestSuccess(this, response);
+                            }
                         }
                     }).catch(error => {
                         this.resultTab = 'response';
