@@ -75,10 +75,14 @@
                         <summary class="summary">State</summary>
                         <p class="text">
                             <span v-show="response.data.hasOwnProperty('isSuccess')" class="icon"
-                                  :class="response.data.isSuccess ? 'success':'failure'">
+                                  :class="[response.data.isSuccess ? 'success':'failure', response.data.occurred ? 'occurred' : null]">
                                 <template v-if="response.data.code !== 0"> - {{response.data.code}}</template>
                             </span><span v-html="response.data.message"></span>
                         </p>
+                    </details>
+                    <details v-show="response.data.occurred" class="item" open>
+                        <summary class="summary">Occurred</summary>
+                        <pre class="text pre-data">{{response.data.occurred}}</pre>
                     </details>
                     <details v-show="!!response.data.description" open class="item">
                         <summary class="summary">Description</summary>
@@ -161,8 +165,9 @@
                 this.request.status.message = message;
             },
             onSubmit() {
-                let params = lodash.clone(this.params);
+                let params = JSON.parse(JSON.stringify(this.params));
                 const method = this.method.toLowerCase();
+                // 注意：params 对象中的部分字段可能会被删除
                 const url = this.getRequestUrl(params);
                 if (url === false) {
                     return false;
@@ -184,7 +189,7 @@
                 this.request.url = url;
                 this.request.params = params;
 
-                if (method === "post" && params) {
+                if (method.toLowerCase() === 'post' && params) {
                     const formData = new FormData();
                     for (let i in params) {
                         if (!params.hasOwnProperty(i)) continue;
@@ -203,9 +208,10 @@
                         this.response.statusText = response.statusText;
                         this.response.header = response.header;
                         this.response.data = response.data;
+                        console.log(params);
                         // 执行全局回调处理
                         if (lodash.isFunction(window.onRequestSuccess)) {
-                            window.onRequestSuccess(this, params, response);
+                            window.onRequestSuccess(this, response);
                         }
                     }).catch(error => {
                         this.resultTab = 'response';
@@ -550,6 +556,10 @@
     }
     .response-ct .tab-content .icon.failure::before {
         content: 'FAILURE';
+    }
+    /* 执行过程中有其他一般性错误发生 */
+    .response-ct .tab-content .icon.success.occurred {
+        background-color: orange;
     }
 </style>
 
