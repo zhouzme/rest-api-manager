@@ -247,6 +247,8 @@
                         return 'number';
                     case 'float':
                     case 'string':
+                    case 'text':
+                        return 'textarea';
                     case 'mixed':
                         return 'text';
                     default:
