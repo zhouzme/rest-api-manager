@@ -20,12 +20,12 @@
             <div class="tab-content-ct scrollbar">
                 <ul class="tab-content form-ul" v-for="(data, i) in getApiInfo.methods" :class="i === method?'curr':''" :key="apiName +`-`+ i">
                     <li v-for="(loopParam,j) in data.params" :key="apiName +`-`+ i +`-`+ j" class="form-li" :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')" :title="loopParam.comment" :data-name="loopParam.name">
-                        <textarea v-if="loopParam && loopParam.type && (loopParam.type.indexOf('textarea') !== -1)"
+                        <textarea v-if="inputType(loopParam.type) === 'textarea'"
                                   class="input" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
                                   :placeholder="loopParam.comment"></textarea>
-                        <input v-else-if="loopParam && inputType(loopParam.type) === 'file'" @change="e=>params[loopParam.name]=e.target.files[0]" :required="isRequired(loopParam.type)"
+                        <input v-else-if="inputType(loopParam.type) === 'file'" @change="e=>params[loopParam.name]=e.target.files[0]" :required="isRequired(loopParam.type)"
                                class="input" type="file" :placeholder="loopParam.comment">
-                        <input v-else-if="loopParam" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
+                        <input v-else v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
                                class="input" :class="inputType(loopParam.type)" :type="inputType(loopParam.type)"
                                :placeholder="loopParam.comment">
                         <span class="btn-remove" @click="onRemove(loopParam.name)">╳</span>
@@ -247,10 +247,10 @@
                         return 'number';
                     case 'float':
                     case 'string':
-                    case 'text':
-                        return 'textarea';
                     case 'mixed':
                         return 'text';
+                    case 'text':
+                        return 'textarea';
                     default:
                         return type;
                 }
