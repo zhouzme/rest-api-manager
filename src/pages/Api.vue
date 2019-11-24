@@ -42,7 +42,7 @@
             loadApiList() {
                 const apiListUrl = Configs.ApiListUrl();
                 Http.get(apiListUrl).then(response => {
-                    if (!response.data.isSuccess) {
+                    if (!response.data.success) {
                         alert(response.data.message);
                     } else {
                         this.apiPathList = response.data.data.apiPathList;

@@ -74,8 +74,8 @@
                     <details class="item state" open>
                         <summary class="summary">State</summary>
                         <p class="text">
-                            <span v-show="response.data.hasOwnProperty('isSuccess')" class="icon"
-                                  :class="[response.data.isSuccess ? 'success':'failure', response.data.occurred ? 'occurred' : null]">
+                            <span v-show="response.data.hasOwnProperty('success')" class="icon"
+                                  :class="[response.data.success ? 'success':'failure', response.data.occurred ? 'occurred' : null]">
                                 <template v-if="response.data.code !== 0"> - {{response.data.code}}</template>
                             </span><span v-html="response.data.message"></span>
                         </p>
@@ -209,7 +209,7 @@
                         this.response.header = response.header;
                         this.response.data = response.data;
                         // 执行全局回调处理
-                        if (response.data.isSuccess) {
+                        if (response.data.success) {
                             if (lodash.isFunction(window.onRequestSuccess)) {
                                 window.onRequestSuccess(this, response);
                             }
