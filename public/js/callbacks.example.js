@@ -5,7 +5,7 @@ window.onRequestBefore = function (apiName, method, headers, url, params) {
     return [headers, url, params];
 };
 // 当执行每个接口请求成功后的回调操作
-window.onRequestSuccess = function(vue, response) {
+window.onRequestSuccess = function (vue, response) {
     if (vue.apiName.toLowerCase() === 'api/command' && vue.method.toLowerCase() === 'put'
         && vue.params && typeof vue.params.cmd !== "undefined" && vue.params.cmd === "rebuild-list"
         && response.data.success) {
