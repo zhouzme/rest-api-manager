@@ -165,10 +165,11 @@
                 this.request.status.message = message;
             },
             onSubmit() {
+                const config = {headers:{}};
                 let params = JSON.parse(JSON.stringify(this.params));
-                const method = this.method.toLowerCase();
+                const method = this.method.toUpperCase();
                 // 注意：params 对象中的部分字段可能会被删除
-                const url = this.getRequestUrl(params);
+                let url = this.getRequestUrl(params);
                 if (url === false) {
                     return false;
                 }
@@ -176,9 +177,9 @@
                 this.resultTab = 'request';
 
                 // 清除上一次的结果
+                this.request.config = config;
                 this.request.method = this.method;
-                this.request.header = {};
-                this.request.config = {};
+                this.request.header = config.headers;
                 this.setRequestStatus('Loading', 'please wait ...');
                 this.response.header = {};
                 this.response.data = {};
@@ -189,17 +190,10 @@
                 this.request.url = url;
                 this.request.params = params;
 
-                if (method.toLowerCase() === 'post' && params) {
-                    const formData = new FormData();
-                    for (let i in params) {
-                        if (!params.hasOwnProperty(i)) continue;
-                        formData.append(i, params[i]);
-                    }
-                    params = formData;
-                }
-
                 try {
-                    Http[method](url, params).then((response) => {
+
+                    [url, params] = Http.getRequestConfig(this.apiName, method, url, params, config);
+                    Http.request(method, url, params, config).then((response) => {
                         this.resultTab = 'response';
                         this.request.config = response.axiosConfig;
                         this.request.header = response.request.headers;
