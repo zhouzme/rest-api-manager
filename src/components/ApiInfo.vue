@@ -7,18 +7,28 @@
             </details>
             <div class="title">
                 <ul class="tabs methods" title="Methods:">
-                    <li v-for="(vars, i) in getApiInfo.methods" :key="i" @click="onTabMethod(i)" class="tab method"
+                    <li v-for="(_, i) in getApiInfo.methods" :key="apiName +`-`+ i" @click="onTabMethod(i)" class="tab method"
                         :class="i === method?'curr':''">{{i}}
                     </li>
                 </ul>
             </div>
-            <details class="method-info-details" open>
+            <div class="method-do-tabs">
+                <template v-for="(methodDos, i) in getApiInfo.methods">
+                <ul v-show="Object.getOwnPropertyNames(methodDos).length > 2" class="tabs method-dos" :class="i===method?'curr':''" :key="apiName +`-`+ i" title="Do:">
+                    <li v-for="(_, j) in methodDos" :key="apiName +`-`+ i +`-`+j" @click="onTabMethodDo(j)" class="tab method-do"
+                        :class="i===method&&j===methodDo?'curr':''">{{j}}
+                    </li>
+                </ul>
+                </template>
+            </div>
+            <details v-if="method && methodDo" class="method-info-details" open>
                 <summary class="pointer"></summary>
                 <div v-show="!!getMethodUri" class="uri">{{getMethodUri}}</div>
                 <div v-show="!!getMethodDescription" class="description" v-html="getMethodDescription"></div>
             </details>
             <div class="tab-content-ct scrollbar">
-                <ul class="tab-content form-ul" v-for="(data, i) in getApiInfo.methods" :class="i === method?'curr':''" :key="apiName +`-`+ i">
+                <template v-for="(methodDos, i) in getApiInfo.methods">
+                <ul class="tab-content form-ul" v-for="(data, j) in methodDos" :class="i === method&&j === methodDo?'curr':''" :key="apiName +`-`+ i +`-`+ j">
                     <li v-for="(loopParam,j) in data.params" :key="apiName +`-`+ i +`-`+ j" class="form-li" :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')" :title="loopParam.comment" :data-name="loopParam.name">
                         <textarea v-if="inputType(loopParam.type) === 'textarea'"
                                   class="input" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
@@ -33,6 +43,7 @@
                     <li v-show="!data.params" class="form-li no-params">No Params!</li>
                     <li class="form-li button"><input type="button" class="input button submit" @click="onSubmit()" value="SEND"></li>
                 </ul>
+                </template>
             </div>
         </div>
         <div class="response-ct">
@@ -106,15 +117,22 @@
         name: "ApiInfo",
         data() {
             return {
-                method: '',
+                methodFocus: {},
+                methodDoFocus: {},
                 params: null,
                 allMethodParams: {},
                 resultTab: '',
-                request: {method: '', header: {}, config: {}, url: '', params: {}, status: {type:'', message:''}},
+                request: {method: '', methodDo: '', header: {}, config: {}, url: '', params: {}, status: {type:'', message:''}},
                 response: {status: '', statusText: '', header: {}, data: {}, error: ''},
             };
         },
         computed: {
+            method() {
+                return this.methodFocus[this.apiName];
+            },
+            methodDo() {
+                return this.methodDoFocus[this.apiName + '.' + this.method];
+            },
             getApiInfo() {
                 return lodash.has(this.apiInfoList, this.apiName) ? this.apiInfoList[this.apiName] : [];
             },
@@ -122,15 +140,20 @@
                 return this.getApiInfo.methods;
             },
             getMethodUri() {
-                return this.getMethods[this.method].uri;
+                return this.getMethods[this.method][this.methodDo].uri;
             },
             getMethodDescription() {
-                return this.getMethods[this.method].description;
+                return this.getMethods[this.method][this.methodDo].description;
             }
         },
         methods: {
             onTabMethod(method) {
-                this.method = method;
+                this.$set(this.methodFocus, this.apiName, method);
+                this.setDefaultMethodDo();
+                this.setDefaultParams();
+            },
+            onTabMethodDo(doName) {
+                this.$set(this.methodDoFocus, this.apiName + '.' + this.method, doName);
                 this.setDefaultParams();
             },
             onTabResponse(type) {
@@ -140,7 +163,7 @@
                 this.$delete(this.params, paramName);
             },
             getRequestUrl(params) {
-                let uri = this.getApiInfo.methods[this.method].uri;
+                let uri = this.getApiInfo.methods[this.method][this.methodDo].uri;
                 if (params) {
                     for(let k in params) {
                         if (!params.hasOwnProperty(k)) continue;
@@ -179,6 +202,7 @@
                 // 清除上一次的结果
                 this.request.config = config;
                 this.request.method = this.method;
+                this.request.methodDo = this.methodDo;
                 this.request.header = config.headers;
                 this.setRequestStatus('Loading', 'please wait ...');
                 this.response.header = {};
@@ -191,7 +215,6 @@
                 this.request.params = params;
 
                 try {
-
                     [url, params] = Http.getRequestConfig(this.apiName, method, url, params, config);
                     Http.request(method, url, params, config).then((response) => {
                         this.resultTab = 'response';
@@ -255,7 +278,17 @@
                 for (let method in methods) {
                     if (!methods.hasOwnProperty(method)) continue;
                     // 设置初始默认显示的请求方式
-                    this.method = method;
+                    this.$set(this.methodFocus, this.apiName, method);
+                    break;
+                }
+            },
+            setDefaultMethodDo() {
+                if (!this.method || this.methodDo) return;
+                const methodDos = this.apiInfoList[this.apiName].methods[this.method];
+                for (let doName in methodDos) {
+                    if (!methodDos.hasOwnProperty(doName)) continue;
+                    // 设置初始默认显示的请求方式下的执行方法
+                    this.$set(this.methodDoFocus, this.apiName+'.'+this.method, doName);
                     break;
                 }
             },
@@ -267,12 +300,16 @@
                 if (typeof this.allMethodParams[this.apiName][this.method] === "undefined") {
                     this.allMethodParams[this.apiName][this.method] = {};
                 }
-                this.params = this.allMethodParams[this.apiName][this.method];
+                if (typeof this.allMethodParams[this.apiName][this.method][this.methodDo] === "undefined") {
+                    this.allMethodParams[this.apiName][this.method][this.methodDo] = {};
+                }
+                this.params = this.allMethodParams[this.apiName][this.method][this.methodDo];
             }
         },
         created() {
             // 优先设置默认请求方式
             this.setDefaultMethod();
+            this.setDefaultMethodDo();
             this.setDefaultParams();
         },
         props: {
@@ -283,8 +320,8 @@
         },
         watch: {
             apiName() {
-                this.method = '';
                 this.setDefaultMethod();
+                this.setDefaultMethodDo();
                 this.setDefaultParams();
             }
         }
@@ -297,7 +334,6 @@
         white-space: nowrap;
         line-height: 1.5rem;
         font-size: .6rem;
-        text-align: center;
         color: #999;
     }
     .tabs:before,
@@ -456,6 +492,35 @@
         margin: 0 1rem;
         border-bottom: solid 1px #E5E5E5;
     }
+
+    .request-ct .method-do-tabs {
+
+    }
+    .request-ct .method-do-tabs {
+        margin: 0 1rem;
+    }
+    .request-ct .method-do-tabs .tabs {
+        display: none;
+        padding: 0;
+        border-bottom: solid 1px #F5F5F5;
+    }
+    .request-ct .method-do-tabs .tabs.curr {
+        display: block;
+    }
+    .request-ct .method-do-tabs .tabs .tab {
+        padding: .15rem .3rem;
+        margin-right: .5rem;
+        line-height: 1em;
+    }
+    .request-ct .method-do-tabs .tabs .tab.curr {
+        border: none;
+        color: #FFF;
+        background-color: #3285ff;
+    }
+    .request-ct .method-do-tabs .tabs .tab.curr:after {
+        display: none;
+    }
+
     .request-ct .method-info-details {
         position: relative;
     }

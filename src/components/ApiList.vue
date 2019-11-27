@@ -108,7 +108,7 @@
         color: #333;
         background-color: #FFF;
     }
-    .api .brief:hover {
-        color: #333;
+    .api .brief:not(.curr):hover {
+        color: #DDDDDD;
     }
 </style>
