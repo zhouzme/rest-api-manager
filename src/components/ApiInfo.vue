@@ -27,7 +27,9 @@
             </div>
             <details v-if="method && methodDo" class="method-info-details" open>
                 <summary class="pointer"></summary>
-                <div v-show="!!getMethodUri" class="uri">{{getMethodUri}}</div>
+                <div v-show="!!getMethodUri" class="uri">{{getMethodUri}}<span class="btn-request iconfont"
+                                                                               :class="(request.url && response.apiMark == getApiMark())?`icon-shuaxin`:`icon-qidong`"
+                                                                               @click="onSubmit()"></span></div>
                 <div v-show="!!getMethodDescription" class="description" v-html="getMethodDescription"></div>
             </details>
             <div class="tab-content-ct scrollbar">
@@ -35,12 +37,13 @@
                     <div class="tab-content" v-for="(data, j) in methodDos" :key="apiName +`-`+ i +`-`+ j"
                          :class="i === method&&j === methodDo?'curr':''">
                         <ul v-if="data.uriParams" class="form-ul uri-params-ul">
-                            <li v-for="(loopParam,k) in data.uriParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k" class="form-li"
+                            <li v-for="(loopParam,k) in data.uriParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k"
+                                class="form-li"
                                 :class="[inputType(loopParam.type), 'required1']"
                                 :title="loopParam.comment" :data-name="`{`+loopParam.name+`}`">
                                 <textarea required v-if="inputType(loopParam.type) === 'textarea'"
-                                      class="input" v-model="uriParams[loopParam.name]"
-                                      :placeholder="loopParam.comment"></textarea>
+                                          class="input" v-model="uriParams[loopParam.name]"
+                                          :placeholder="loopParam.comment"></textarea>
                                 <input required v-else-if="inputType(loopParam.type) === 'file'"
                                        @change="e=>uriParams[loopParam.name]=e.target.files[0]"
                                        class="input" type="file" :placeholder="loopParam.comment">
@@ -51,7 +54,8 @@
                             </li>
                         </ul>
                         <ul class="form-ul body-params-ul">
-                            <li v-for="(loopParam,k) in data.bodyParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k" class="form-li"
+                            <li v-for="(loopParam,k) in data.bodyParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k"
+                                class="form-li"
                                 :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')"
                                 :title="loopParam.comment" :data-name="loopParam.name">
                                 <textarea v-if="inputType(loopParam.type) === 'textarea'"
@@ -62,7 +66,8 @@
                                        @change="e=>bodyParams[loopParam.name]=e.target.files[0]"
                                        :required="isRequired(loopParam.type)"
                                        class="input" type="file" :placeholder="loopParam.comment">
-                                <input v-else v-model="bodyParams[loopParam.name]" :required="isRequired(loopParam.type)"
+                                <input v-else v-model="bodyParams[loopParam.name]"
+                                       :required="isRequired(loopParam.type)"
                                        class="input" :class="inputType(loopParam.type)"
                                        :type="inputType(loopParam.type)"
                                        :placeholder="loopParam.comment">
@@ -165,7 +170,7 @@
                     params: {},
                     status: {type: '', message: ''}
                 },
-                response: {status: '', statusText: '', header: {}, data: {}, error: ''},
+                response: {apiMark: null, status: '', statusText: '', header: {}, data: {}, error: ''},
             };
         },
         computed: {
@@ -189,6 +194,9 @@
             }
         },
         methods: {
+            getApiMark() {
+                return [this.apiName, this.method, this.methodDo].join('|');
+            },
             onTabMethod(method) {
                 this.$set(this.methodFocus, this.apiName, method);
                 this.setDefaultMethodDo();
@@ -252,6 +260,7 @@
                 this.response.status = '';
                 this.response.statusText = '';
                 this.response.error = '';
+                this.response.apiMark = this.getApiMark();
 
                 this.request.url = url;
                 this.request.params = bodyParams;
@@ -484,11 +493,14 @@
         color: #CCC;
         border: none;
     }
+
     .form-ul:before {
-        font-size: .7rem;
-        color: #CCC;
-        margin-top: -3rem;
         float: left;
+        font-family: microsoft Yahei, "Consolas", sans-serif;
+        margin-top: -3.5rem;
+        font-weight: bolder;
+        color: #EEE;
+        font-size: .8rem;
     }
 
     .scrollbar::-webkit-scrollbar-thumb {
@@ -625,6 +637,18 @@
         border-bottom: solid 1px #F5F5F5;
     }
 
+    .request-ct .method-info-details .uri .btn-request {
+        float: right;
+        font-size: .7rem;
+        font-weight: bolder;
+        cursor: pointer;
+        color: #999;
+    }
+
+    .request-ct .method-info-details .uri .btn-request:hover {
+        color: #20b2aa;
+    }
+
     .api-info-ct .api-description .description .name::before,
     .request-ct .method-info-details .uri::before,
     .response-ct .url::before {
@@ -641,15 +665,19 @@
     .request-ct .method-info-details .description {
         color: #999;
     }
+
     .request-ct .tab-content {
-        padding-top: 1rem;
+        padding-top: 1.5rem;
     }
+
     .request-ct .tab-content .uri-params-ul {
         padding: 3rem 2.5rem 1rem 2.5rem;
     }
+
     .request-ct .tab-content .uri-params-ul:before {
         content: 'URI Params';
     }
+
     .request-ct .tab-content .body-params-ul:before {
         content: 'Body Params';
     }
