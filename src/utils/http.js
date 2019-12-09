@@ -11,13 +11,13 @@ const METHODS = {
     DELETE: 'DELETE',
 };
 
-const getRequestConfig = function (apiName, method, url, params = null, config = {}) {
+const getRequestConfig = function (apiName, method, url, uriParams, bodyParams = null, config = {}) {
     if (!config) config = {};
     if (typeof config.headers === "undefined") config.headers = {};
     if (method === METHODS.POST) {
         if (!config.headers.hasOwnProperty('Content-Type')) {
             let ct = 'application/x-www-form-urlencoded';
-            if (params instanceof FormData) {
+            if (bodyParams instanceof FormData) {
                 ct = 'multipart/form-data';
             }
             config.headers['Content-Type'] = ct;
@@ -29,37 +29,37 @@ const getRequestConfig = function (apiName, method, url, params = null, config =
     }
     let headers = JSON.parse(JSON.stringify(config.headers));
     // 自定义 header 处理
-    [headers, url, params] = window.onRequestBefore(apiName, method, headers, url, params);
+    [headers, url, bodyParams] = window.onRequestBefore(apiName, method, headers, url, uriParams, bodyParams);
     config.headers = headers;
-    console.log('headers after', config.headers, url, params);
-    return [url, params];
+    console.log('headers after', config.headers, url, bodyParams);
+    return [url, bodyParams];
 };
 
 export default {
     METHODS,
     getRequestConfig,
-    request(method, url, params, config) {
+    request(method, url, uriParams, bodyParams, config) {
         switch (method) {
             case METHODS.HEAD:
-                return this.head(url, params, config);
+                return this.head(url, bodyParams, config);
             case METHODS.GET:
-                return this.get(url, params, config);
+                return this.get(url, bodyParams, config);
             case METHODS.POST:
-                if (params) {
+                if (bodyParams) {
                     const formData = new FormData();
-                    for (let i in params) {
-                        if (!params.hasOwnProperty(i)) continue;
-                        formData.append(i, params[i]);
+                    for (let i in bodyParams) {
+                        if (!bodyParams.hasOwnProperty(i)) continue;
+                        formData.append(i, bodyParams[i]);
                     }
-                    params = formData;
+                    bodyParams = formData;
                 }
-                return this.post(url, params, config);
+                return this.post(url, bodyParams, config);
             case METHODS.PUT:
-                return this.put(url, params, config);
+                return this.put(url, bodyParams, config);
             case METHODS.PATCH:
-                return this.patch(url, params, config);
+                return this.patch(url, bodyParams, config);
             case METHODS.DELETE:
-                return this.delete(url, params, config);
+                return this.delete(url, bodyParams, config);
             default:
                 console.log('not supported request rest method ', method)
         }

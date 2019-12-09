@@ -3,22 +3,26 @@
         <div class="request-ct">
             <details v-show="!!getApiInfo.description || !!getApiInfo.brief" class="api-description">
                 <summary class="pointer"></summary>
-                <p class="description"><span v-show="!!getApiInfo.brief" class="name">{{getApiInfo.name}}</span><span v-html="getApiInfo.description"></span></p>
+                <p class="description"><span v-show="!!getApiInfo.brief" class="name">{{getApiInfo.name}}</span><span
+                    v-html="getApiInfo.description"></span></p>
             </details>
             <div class="title">
                 <ul class="tabs methods" title="Methods:">
-                    <li v-for="(_, i) in getApiInfo.methods" :key="apiName +`-`+ i" @click="onTabMethod(i)" class="tab method"
+                    <li v-for="(_, i) in getApiInfo.methods" :key="apiName +`-`+ i" @click="onTabMethod(i)"
+                        class="tab method"
                         :class="i === method?'curr':''">{{i}}
                     </li>
                 </ul>
             </div>
             <div class="method-do-tabs">
                 <template v-for="(methodDos, i) in getApiInfo.methods">
-                <ul v-show="Object.getOwnPropertyNames(methodDos).length > 2" class="tabs method-dos" :class="i===method?'curr':''" :key="apiName +`-`+ i" title="Do:">
-                    <li v-for="(_, j) in methodDos" :key="apiName +`-`+ i +`-`+j" @click="onTabMethodDo(j)" class="tab method-do"
-                        :class="i===method&&j===methodDo?'curr':''">{{j}}
-                    </li>
-                </ul>
+                    <ul v-show="Object.getOwnPropertyNames(methodDos).length > 2" class="tabs method-dos"
+                        :class="i===method?'curr':''" :key="apiName +`-`+ i" title="Do:">
+                        <li v-for="(_, j) in methodDos" :key="apiName +`-`+ i +`-`+j" @click="onTabMethodDo(j)"
+                            class="tab method-do"
+                            :class="i===method&&j===methodDo?'curr':''">{{j}}
+                        </li>
+                    </ul>
                 </template>
             </div>
             <details v-if="method && methodDo" class="method-info-details" open>
@@ -28,28 +32,56 @@
             </details>
             <div class="tab-content-ct scrollbar">
                 <template v-for="(methodDos, i) in getApiInfo.methods">
-                <ul class="tab-content form-ul" v-for="(data, j) in methodDos" :class="i === method&&j === methodDo?'curr':''" :key="apiName +`-`+ i +`-`+ j">
-                    <li v-for="(loopParam,j) in data.params" :key="apiName +`-`+ i +`-`+ j" class="form-li" :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')" :title="loopParam.comment" :data-name="loopParam.name">
-                        <textarea v-if="inputType(loopParam.type) === 'textarea'"
-                                  class="input" v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
-                                  :placeholder="loopParam.comment"></textarea>
-                        <input v-else-if="inputType(loopParam.type) === 'file'" @change="e=>params[loopParam.name]=e.target.files[0]" :required="isRequired(loopParam.type)"
-                               class="input" type="file" :placeholder="loopParam.comment">
-                        <input v-else v-model="params[loopParam.name]" :required="isRequired(loopParam.type)"
-                               class="input" :class="inputType(loopParam.type)" :type="inputType(loopParam.type)"
-                               :placeholder="loopParam.comment">
-                        <span class="btn-remove" @click="onRemove(loopParam.name)">╳</span>
-                    </li>
-                    <li v-show="!data.params" class="form-li no-params">No Params!</li>
-                    <li class="form-li button"><input type="button" class="input button submit" @click="onSubmit()" value="SEND"></li>
-                </ul>
+                    <div class="tab-content" v-for="(data, j) in methodDos" :key="apiName +`-`+ i +`-`+ j"
+                         :class="i === method&&j === methodDo?'curr':''">
+                        <ul v-if="data.uriParams" class="form-ul uri-params-ul">
+                            <li v-for="(loopParam,k) in data.uriParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k" class="form-li"
+                                :class="[inputType(loopParam.type), 'required1']"
+                                :title="loopParam.comment" :data-name="`{`+loopParam.name+`}`">
+                                <textarea required v-if="inputType(loopParam.type) === 'textarea'"
+                                      class="input" v-model="uriParams[loopParam.name]"
+                                      :placeholder="loopParam.comment"></textarea>
+                                <input required v-else-if="inputType(loopParam.type) === 'file'"
+                                       @change="e=>uriParams[loopParam.name]=e.target.files[0]"
+                                       class="input" type="file" :placeholder="loopParam.comment">
+                                <input required v-else v-model="uriParams[loopParam.name]"
+                                       class="input" :class="inputType(loopParam.type)"
+                                       :type="inputType(loopParam.type)"
+                                       :placeholder="loopParam.comment">
+                            </li>
+                        </ul>
+                        <ul class="form-ul body-params-ul">
+                            <li v-for="(loopParam,k) in data.bodyParams" :key="apiName +`-`+ i +`-`+ j +`-`+ k" class="form-li"
+                                :class="inputType(loopParam.type) +' '+ (isRequired(loopParam.type)? 'required' : '')"
+                                :title="loopParam.comment" :data-name="loopParam.name">
+                                <textarea v-if="inputType(loopParam.type) === 'textarea'"
+                                          class="input" v-model="bodyParams[loopParam.name]"
+                                          :required="isRequired(loopParam.type)"
+                                          :placeholder="loopParam.comment"></textarea>
+                                <input v-else-if="inputType(loopParam.type) === 'file'"
+                                       @change="e=>bodyParams[loopParam.name]=e.target.files[0]"
+                                       :required="isRequired(loopParam.type)"
+                                       class="input" type="file" :placeholder="loopParam.comment">
+                                <input v-else v-model="bodyParams[loopParam.name]" :required="isRequired(loopParam.type)"
+                                       class="input" :class="inputType(loopParam.type)"
+                                       :type="inputType(loopParam.type)"
+                                       :placeholder="loopParam.comment">
+                                <span class="btn-remove" @click="onRemove(loopParam.name)">╳</span>
+                            </li>
+                            <li v-show="!data.bodyParams" class="form-li no-params">No Body Params!</li>
+                            <li class="form-li button"><input type="button" class="input button submit"
+                                                              @click="onSubmit()" value="SEND"></li>
+                        </ul>
+                    </div>
                 </template>
             </div>
         </div>
         <div class="response-ct">
             <div class="title">
                 <ul class="tabs" title="Results:">
-                    <li v-for="(type, i) in ['request', 'response']" class="tab request" @click="onTabResponse(type)" :class="{type, curr: resultTab === type}" :key="i">{{type.toUpperCase()}}</li>
+                    <li v-for="(type, i) in ['request', 'response']" class="tab request" @click="onTabResponse(type)"
+                        :class="{type, curr: resultTab === type}" :key="i">{{type.toUpperCase()}}
+                    </li>
                 </ul>
             </div>
             <div class="url" v-show="!!request.url" :data-method="request.method">{{request.url}}</div>
@@ -113,16 +145,26 @@
     import lodash from 'lodash';
     import Http from '@/utils/http';
     import Configs from '@/config';
+
     export default {
         name: "ApiInfo",
         data() {
             return {
                 methodFocus: {},
                 methodDoFocus: {},
-                params: null,
+                uriParams: null,
+                bodyParams: null,
                 allMethodParams: {},
                 resultTab: '',
-                request: {method: '', methodDo: '', header: {}, config: {}, url: '', params: {}, status: {type:'', message:''}},
+                request: {
+                    method: '',
+                    methodDo: '',
+                    header: {},
+                    config: {},
+                    url: '',
+                    params: {},
+                    status: {type: '', message: ''}
+                },
                 response: {status: '', statusText: '', header: {}, data: {}, error: ''},
             };
         },
@@ -160,16 +202,16 @@
                 this.resultTab = type;
             },
             onRemove(paramName) {
-                this.$delete(this.params, paramName);
+                this.$delete(this.bodyParams, paramName);
             },
             getRequestUrl(params) {
                 let uri = this.getApiInfo.methods[this.method][this.methodDo].uri;
                 if (params) {
-                    for(let k in params) {
+                    for (let k in params) {
                         if (!params.hasOwnProperty(k)) continue;
                         let v = params[k];
-                        if (uri.indexOf('{' + k + '}') > -1) delete params[k];
-                        uri = uri.replace('{' + k + '}', encodeURIComponent(v));
+                        // uri = uri.replace('{' + k + '}', encodeURIComponent(v));
+                        uri = uri.replace('{' + k + '}', v);
                     }
                     uri = uri.replace(/\/+(\?|$)/, '/$1');
                 }
@@ -188,11 +230,11 @@
                 this.request.status.message = message;
             },
             onSubmit() {
-                const config = {headers:{}};
-                let params = JSON.parse(JSON.stringify(this.params));
+                const config = {headers: {}};
+                let bodyParams = JSON.parse(JSON.stringify(this.bodyParams));
+                const uriParams = JSON.parse(JSON.stringify(this.uriParams));
                 const method = this.method.toUpperCase();
-                // 注意：params 对象中的部分字段可能会被删除
-                let url = this.getRequestUrl(params);
+                let url = this.getRequestUrl(uriParams);
                 if (url === false) {
                     return false;
                 }
@@ -212,11 +254,11 @@
                 this.response.error = '';
 
                 this.request.url = url;
-                this.request.params = params;
+                this.request.params = bodyParams;
 
                 try {
-                    [url, params] = Http.getRequestConfig(this.apiName, method, url, params, config);
-                    Http.request(method, url, params, config).then((response) => {
+                    [url, bodyParams] = Http.getRequestConfig(this.apiName, method, url, uriParams, bodyParams, config);
+                    Http.request(method, url, bodyParams, config).then((response) => {
                         this.resultTab = 'response';
                         this.request.config = response.axiosConfig;
                         this.request.header = response.request.headers;
@@ -288,7 +330,7 @@
                 for (let doName in methodDos) {
                     if (!methodDos.hasOwnProperty(doName)) continue;
                     // 设置初始默认显示的请求方式下的执行方法
-                    this.$set(this.methodDoFocus, this.apiName+'.'+this.method, doName);
+                    this.$set(this.methodDoFocus, this.apiName + '.' + this.method, doName);
                     break;
                 }
             },
@@ -301,9 +343,12 @@
                     this.allMethodParams[this.apiName][this.method] = {};
                 }
                 if (typeof this.allMethodParams[this.apiName][this.method][this.methodDo] === "undefined") {
-                    this.allMethodParams[this.apiName][this.method][this.methodDo] = {};
+                    this.allMethodParams[this.apiName][this.method][this.methodDo] = {bodyParams: {}, uriParams: {}};
                 }
-                this.params = this.allMethodParams[this.apiName][this.method][this.methodDo];
+                const result = this.allMethodParams[this.apiName][this.method][this.methodDo];
+                this.bodyParams = result.bodyParams;
+                this.uriParams = result.uriParams;
+                console.log('result', JSON.parse(JSON.stringify(result)))
             }
         },
         created() {
@@ -336,14 +381,17 @@
         font-size: .6rem;
         color: #999;
     }
+
     .tabs:before,
     .tabs .tab {
         display: inline-block;
         padding: 0 .5rem;
     }
+
     .tabs .tab {
         padding: 0 1.25rem;
     }
+
     .tabs:before {
         content: attr(title);
         color: #333;
@@ -362,12 +410,14 @@
         color: #333;
         background-color: #F5F5F5;
     }
+
     .tabs .tab.curr {
         /*position: relative;*/
         color: #333;
         border: solid 1px #E5E5E5;
         border-bottom: none;
     }
+
     .tabs .tab.curr:after {
         /*position: absolute;*/
         /*bottom: -1px;*/
@@ -379,26 +429,32 @@
         margin: 0 -1.25rem -1px -1.25rem;
         border-bottom: solid 1px #FFF;
     }
+
     .tab-content-ct {
         flex: 1;
         height: 100%;
         margin: .5rem 0;
         overflow-y: scroll;
     }
+
     .tab-content {
         display: none;
         word-break: break-all;
         word-wrap: break-word;
     }
+
     .tab-content.curr {
         display: block;
     }
+
     .form-li {
         position: relative;
     }
+
     .form-li.required {
         border: solid 2px #AAA;
     }
+
     .form-li .btn-remove {
         display: none;
         position: absolute;
@@ -412,12 +468,15 @@
         color: #CCC;
         cursor: pointer;
     }
+
     .form-li .btn-remove:hover {
         color: #333;
     }
+
     .form-li:hover .btn-remove {
         display: block;
     }
+
     .form-li.no-params {
         padding: 0;
         font-size: 2.5rem;
@@ -425,24 +484,35 @@
         color: #CCC;
         border: none;
     }
+    .form-ul:before {
+        font-size: .7rem;
+        color: #CCC;
+        margin-top: -3rem;
+        float: left;
+    }
+
     .scrollbar::-webkit-scrollbar-thumb {
-        background-color: rgba(153,153,153,0);
+        background-color: rgba(153, 153, 153, 0);
     }
+
     .scrollbar:hover::-webkit-scrollbar-thumb {
-        background-color: rgba(153,153,153,1);
+        background-color: rgba(153, 153, 153, 1);
     }
+
     .api-info-ct {
         display: flex;
         flex-direction: row;
         flex-grow: 1;
         height: 100%;
     }
+
     .request-ct,
     .response-ct {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
     }
+
     .request-ct {
         /*flex: 1;*/
         width: 50%;
@@ -452,6 +522,7 @@
         overflow-x: auto;
         resize: horizontal;
     }
+
     .response-ct {
         /*flex: 1;*/
         width: 50%;
@@ -465,6 +536,7 @@
         position: relative;
         margin: 0 1rem;
     }
+
     .api-info-ct .api-description .pointer {
         position: absolute;
         top: 50%;
@@ -472,21 +544,26 @@
         color: #EEE;
         cursor: pointer;
     }
+
     .api-info-ct .api-description .description {
         margin-top: 1rem;
         padding: .5rem;
         color: #999;
         border: solid 1px #F5F5F5;
     }
+
     .api-info-ct .api-description .description .name {
         margin-right: 1rem;
     }
+
     .api-info-ct .api-description .description .name::before {
         content: 'NAME';
     }
+
     .api-info-ct .title {
         padding-top: 1rem;
     }
+
     .api-info-ct .title,
     .request-ct .method-info {
         margin: 0 1rem;
@@ -496,27 +573,33 @@
     .request-ct .method-do-tabs {
 
     }
+
     .request-ct .method-do-tabs {
         margin: 0 1rem;
     }
+
     .request-ct .method-do-tabs .tabs {
         display: none;
         padding: 0;
         border-bottom: solid 1px #F5F5F5;
     }
+
     .request-ct .method-do-tabs .tabs.curr {
         display: block;
     }
+
     .request-ct .method-do-tabs .tabs .tab {
         padding: .15rem .3rem;
         margin-right: .5rem;
         line-height: 1em;
     }
+
     .request-ct .method-do-tabs .tabs .tab.curr {
         border: none;
         color: #FFF;
         background-color: #3285ff;
     }
+
     .request-ct .method-do-tabs .tabs .tab.curr:after {
         display: none;
     }
@@ -524,6 +607,7 @@
     .request-ct .method-info-details {
         position: relative;
     }
+
     .request-ct .method-info-details .pointer {
         position: absolute;
         top: -1.3rem;
@@ -531,6 +615,7 @@
         cursor: pointer;
         color: #CCC;
     }
+
     .response-ct .url,
     .request-ct .method-info-details .description,
     .request-ct .method-info-details .uri {
@@ -552,22 +637,37 @@
     .request-ct .method-info-details .uri::before {
         content: 'URI';
     }
+
     .request-ct .method-info-details .description {
         color: #999;
     }
-
+    .request-ct .tab-content {
+        padding-top: 1rem;
+    }
+    .request-ct .tab-content .uri-params-ul {
+        padding: 3rem 2.5rem 1rem 2.5rem;
+    }
+    .request-ct .tab-content .uri-params-ul:before {
+        content: 'URI Params';
+    }
+    .request-ct .tab-content .body-params-ul:before {
+        content: 'Body Params';
+    }
 
     .response-ct .url::before {
         content: attr(data-method);
     }
+
     .response-ct .tab-content {
         padding: 1.5rem 2.5rem;
         overflow: auto;
     }
+
     .response-ct .tab-content .item {
         margin-bottom: 2rem;
         border-top: solid 1px #F5F5F5;
     }
+
     .response-ct .tab-content .summary {
         margin-top: -1.35rem;
         margin-left: -.75rem;
@@ -578,6 +678,7 @@
         color: #BBB;
         background-color: #FFF;
     }
+
     .response-ct .tab-content .text {
         font-size: .6rem;
         line-height: 1.7em;
@@ -587,13 +688,16 @@
         word-break: break-all;
         font-family: Consolas !important;
     }
+
     .response-ct .tab-content .pre-data {
         white-space: pre-wrap;
         overflow-x: auto;
     }
+
     .response-ct .tab-content .error .text {
         color: red;
     }
+
     .response-ct .tab-content .icon {
         display: inline-block;
         margin-right: .5rem;
@@ -603,22 +707,28 @@
         color: #FFF;
         background-color: #3285ff;
     }
+
     .response-ct .tab-content .icon.loading {
         background-color: orange;
     }
+
     .response-ct .tab-content .icon.success {
         background-color: lightseagreen;
     }
+
     .response-ct .tab-content .icon.success::before {
         content: 'SUCCESS';
     }
+
     .response-ct .tab-content .icon.error,
     .response-ct .tab-content .icon.failure {
         background-color: red;
     }
+
     .response-ct .tab-content .icon.failure::before {
         content: 'FAILURE';
     }
+
     /* 执行过程中有其他一般性错误发生 */
     .response-ct .tab-content .icon.success.occurred {
         background-color: orange;
