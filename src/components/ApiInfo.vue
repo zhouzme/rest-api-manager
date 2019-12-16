@@ -73,7 +73,7 @@
                                        :placeholder="loopParam.comment">
                                 <span class="btn-remove" @click="onRemove(loopParam.name)">╳</span>
                             </li>
-                            <li v-show="!data.bodyParams" class="form-li no-params">No Body Params!</li>
+                            <li v-show="!data.bodyParams" class="form-li no-params"></li>
                             <li class="form-li button"><input type="button" class="input button submit"
                                                               @click="onSubmit()" value="SEND"></li>
                         </ul>
@@ -122,8 +122,8 @@
                     <details class="item state" open>
                         <summary class="summary">State</summary>
                         <p class="text">
-                            <span v-show="response.data.hasOwnProperty('success')" class="icon"
-                                  :class="[response.data.success ? 'success':'failure', response.data.occurred ? 'occurred' : null]">
+                            <span v-show="response.data.hasOwnProperty('state')" class="icon"
+                                  :class="[response.data.state ? 'success':'failure', response.data.occurred ? 'occurred' : null]">
                                 <template v-if="response.data.code !== 0"> - {{response.data.code}}</template>
                             </span><span v-html="response.data.message"></span>
                         </p>
@@ -267,7 +267,7 @@
 
                 try {
                     [url, bodyParams] = Http.getRequestConfig(this.apiName, method, url, uriParams, bodyParams, config);
-                    Http.request(method, url, bodyParams, config).then((response) => {
+                    Http.request(method, url, uriParams, bodyParams, config).then((response) => {
                         this.resultTab = 'response';
                         this.request.config = response.axiosConfig;
                         this.request.header = response.request.headers;
@@ -277,7 +277,7 @@
                         this.response.header = response.header;
                         this.response.data = response.data;
                         // 执行全局回调处理
-                        if (response.data.success) {
+                        if (response.data.state) {
                             if (lodash.isFunction(window.onRequestSuccess)) {
                                 window.onRequestSuccess(this, response);
                             }
@@ -391,7 +391,7 @@
         color: #999;
     }
 
-    .tabs:before,
+    .tabs::before,
     .tabs .tab {
         display: inline-block;
         padding: 0 .5rem;
@@ -401,7 +401,7 @@
         padding: 0 1.25rem;
     }
 
-    .tabs:before {
+    .tabs::before {
         content: attr(title);
         color: #333;
         /*background-color: #999;*/
@@ -427,7 +427,7 @@
         border-bottom: none;
     }
 
-    .tabs .tab.curr:after {
+    .tabs .tab.curr::after {
         /*position: absolute;*/
         /*bottom: -1px;*/
         /*left: 0;*/
@@ -488,13 +488,16 @@
 
     .form-li.no-params {
         padding: 0;
-        font-size: 2.5rem;
-        line-height: 1em;
-        color: #CCC;
         border: none;
+        color: #CCC;
+    }
+    .form-li.no-params::before {
+        content: 'No parameters required!';
+        font-size: 2rem;
+        line-height: 1em;
     }
 
-    .form-ul:before {
+    .form-ul::before {
         float: left;
         font-family: microsoft Yahei, "Consolas", sans-serif;
         margin-top: -3.5rem;
@@ -612,7 +615,7 @@
         background-color: #3285ff;
     }
 
-    .request-ct .method-do-tabs .tabs .tab.curr:after {
+    .request-ct .method-do-tabs .tabs .tab.curr::after {
         display: none;
     }
 
@@ -674,11 +677,11 @@
         padding: 3rem 2.5rem 1rem 2.5rem;
     }
 
-    .request-ct .tab-content .uri-params-ul:before {
+    .request-ct .tab-content .uri-params-ul::before {
         content: 'URI Params';
     }
 
-    .request-ct .tab-content .body-params-ul:before {
+    .request-ct .tab-content .body-params-ul::before {
         content: 'Body Params';
     }
 
