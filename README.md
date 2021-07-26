@@ -4,7 +4,7 @@
 &nbsp;
 
 
-![rest-api-manager](https://ghproxy.com/https://raw.githubusercontent.com/zhouzme/rest-api-manager/public/demo/api.png)
+![rest-api-manager](https://ghproxy.com/https://raw.githubusercontent.com/zhouzme/rest-api-manager/master/public/demo/api.png)
 
 增加个示例，不然自己都忘了是怎么用的了。。。
 
