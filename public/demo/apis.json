@@ -1,0 +1,3185 @@
+{
+    "status": 200,
+    "state": 1,
+    "code": 0,
+    "message": "ok",
+    "description": null,
+    "occurred": null,
+    "data": {
+        "apiPathList": {
+            "Api": [
+                "Api\/Index"
+            ],
+            "Cartoon": [
+                "Cartoon\/Index",
+                "Cartoon\/Mapping",
+                "Cartoon\/Period",
+                "Cartoon\/Source",
+                "Cartoon\/Torrent"
+            ],
+            "Category": [
+                "Category\/Index"
+            ],
+            "Celebrity": [
+                "Celebrity\/Index",
+                "Celebrity\/Mapping"
+            ],
+            "Movie": [
+                "Movie\/Index",
+                "Movie\/Mapping",
+                "Movie\/Source",
+                "Movie\/Torrent"
+            ],
+            "Tv": [
+                "Tv\/Index",
+                "Tv\/Mapping",
+                "Tv\/Period",
+                "Tv\/Source",
+                "Tv\/Torrent"
+            ]
+        },
+        "apiInfoList": {
+            "Api\/Index": {
+                "sort": 1,
+                "name": "Api\/Index",
+                "brief": null,
+                "description": "\u63a5\u53e3\u4fe1\u606f\u7ba1\u7406",
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": null,
+                            "pattern": "",
+                            "uri": "\/apis",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    },
+                    "PUT": {
+                        "Caches": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": null,
+                            "pattern": "\/caches",
+                            "uri": "\/apis\/caches",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Caches']",
+                            "description": null
+                        },
+                        "Maps": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": null,
+                            "pattern": "\/maps",
+                            "uri": "\/apis\/maps",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Maps']",
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/apis",
+                "routeMapIgnoreAll": true
+            },
+            "Cartoon\/Index": {
+                "sort": 0,
+                "name": "Cartoon\/Index",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100\u4e4b\u95f4"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoons",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u83b7\u53d6\u89c6\u9891\u5217\u8868"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u6700\u591a20\u4e2a"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoons\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": "\u83b7\u53d6\u6307\u5b9a\u4e00\u6761\u6216\u591a\u6761\u89c6\u9891\u4fe1\u606f"
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "regionNames": {
+                                    "type": "string",
+                                    "name": "regionNames",
+                                    "comment": "\u5730\u533a\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypeNames": {
+                                    "type": "string",
+                                    "name": "subtypeNames",
+                                    "comment": "\u89c6\u9891\u5206\u7c7b\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "celebrities": {
+                                    "type": "string|null",
+                                    "name": "celebrities",
+                                    "comment": "\u89c6\u9891\u6f14\u5458\u3001\u5bfc\u6f14\u3001\u7f16\u5267ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0ccelebrityId-type"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u603b\u96c6\u6570"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u5f53\u524d\u66f4\u65b0\u5230\u7684\u96c6\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u6bcf\u96c6\u65f6\u957f"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoons",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b:[1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u89c6\u9891\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u5206\u949f"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u603b\u96c6\u6570"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u5f53\u524d\u66f4\u65b0\u5230\u7684\u96c6\u6570"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/cartoons\/{id}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/([0-9,]+)$\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        },
+                        "Imports": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9\u7684\u89c6\u9891ID"
+                                },
+                                "json": {
+                                    "type": "text",
+                                    "name": "json",
+                                    "comment": "\u91c7\u96c6\u6570\u636eJSON\u683c\u5f0f\u5316\u540e\u7684\u5b57\u7b26\u4e32"
+                                }
+                            },
+                            "pattern": "\/imports",
+                            "uri": "\/cartoons\/imports",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Imports']",
+                            "description": null
+                        }
+                    },
+                    "PATCH": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "about": {
+                                    "type": "string",
+                                    "name": "about",
+                                    "comment": "\u64cd\u4f5c\u7684\u5c5e\u6027"
+                                },
+                                "aboutIds": {
+                                    "type": "string",
+                                    "name": "aboutIds",
+                                    "comment": "\u5c5e\u6027ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": {
+                                "do": {
+                                    "type": "string",
+                                    "name": "do",
+                                    "comment": "\u5c5e\u6027\u64cd\u4f5c\u65b9\u5f0f"
+                                }
+                            },
+                            "pattern": "\/{id}\/{about}\/{aboutIds}",
+                            "uri": "\/cartoons\/{id}\/{about}\/{aboutIds}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/(\\d+)\\\/(regions|subtypes|celebrities)\\\/([0-9-,%2C]+)\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "about: [celebrities]; \u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];<br>\u5c5e\u6027ID\u683c\u5f0f: celebrityId-type; do: [attach|detach];"
+                        },
+                        "Sources": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "isWatchable": {
+                                    "type": "int",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u53ef\u4ee5\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426VIP\u53ef\u770b"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u8fde\u7eed\u5267\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u66f4\u65b0\u5230\u8fde\u7eed\u5267\u7684\u7b2c\u51e0\u96c6"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u8fde\u7eed\u5267\u7684\u603b\u96c6\u6570"
+                                }
+                            },
+                            "pattern": "\/{id}\/sources",
+                            "uri": "\/cartoons\/{id}\/sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Sources']",
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/cartoons",
+                "routeMapIgnoreAll": false
+            },
+            "Cartoon\/Mapping": {
+                "sort": 0,
+                "name": "Cartoon\/Mapping",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "mappingId": {
+                                    "type": "int|null",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u6620\u5c04\u8bb0\u5f55ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u67e5\u8be2\u5217\u8868\u65f6\u4e3alist"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoon-mappings\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/cartoon-mappings",
+                "routeMapIgnoreAll": false
+            },
+            "Cartoon\/Period": {
+                "sort": 0,
+                "name": "Cartoon\/Period",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-periods",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoon-periods\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "monday": {
+                                    "type": "int|null",
+                                    "name": "monday",
+                                    "comment": ""
+                                },
+                                "tuesday": {
+                                    "type": "int|null",
+                                    "name": "tuesday",
+                                    "comment": ""
+                                },
+                                "wednesday": {
+                                    "type": "int|null",
+                                    "name": "wednesday",
+                                    "comment": ""
+                                },
+                                "thursday": {
+                                    "type": "int|null",
+                                    "name": "thursday",
+                                    "comment": ""
+                                },
+                                "friday": {
+                                    "type": "int|null",
+                                    "name": "friday",
+                                    "comment": ""
+                                },
+                                "saturday": {
+                                    "type": "int|null",
+                                    "name": "saturday",
+                                    "comment": ""
+                                },
+                                "sunday": {
+                                    "type": "int|null",
+                                    "name": "sunday",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-periods",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "monday": {
+                                    "type": "int|null",
+                                    "name": "monday",
+                                    "comment": ""
+                                },
+                                "tuesday": {
+                                    "type": "int|null",
+                                    "name": "tuesday",
+                                    "comment": ""
+                                },
+                                "wednesday": {
+                                    "type": "int|null",
+                                    "name": "wednesday",
+                                    "comment": ""
+                                },
+                                "thursday": {
+                                    "type": "int|null",
+                                    "name": "thursday",
+                                    "comment": ""
+                                },
+                                "friday": {
+                                    "type": "int|null",
+                                    "name": "friday",
+                                    "comment": ""
+                                },
+                                "saturday": {
+                                    "type": "int|null",
+                                    "name": "saturday",
+                                    "comment": ""
+                                },
+                                "sunday": {
+                                    "type": "int|null",
+                                    "name": "sunday",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                },
+                                "updated": {
+                                    "type": "int|null",
+                                    "name": "updated",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/cartoon-periods\/{id}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    },
+                    "DELETE": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoon-periods\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/cartoon-periods",
+                "routeMapIgnoreAll": false
+            },
+            "Cartoon\/Source": {
+                "sort": 0,
+                "name": "Cartoon\/Source",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u5728\u7ebf\u7247\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoon-sources\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": [],
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9ID"
+                                },
+                                "siteName": {
+                                    "type": "int|null",
+                                    "name": "siteName",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9\u540d\u79f0\uff0c\u81ea\u52a8\u8f6c\u6362ID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u6dfb\u52a0"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "name": "url",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u94fe\u63a5"
+                                },
+                                "episode": {
+                                    "type": "int",
+                                    "name": "episode",
+                                    "comment": "\u5f53\u524d\u96c6\u6570"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId:[1372:AcFun, 1371:\u897f\u74dc, 1370:\u57cb\u5806\u5806, 1369:\u54aa\u5495, 1138:CNTV, 1350:\u6b22\u559c\u9996\u6620, 1168:\u7535\u5f71\u7f51, 1175:CCTV, 1174:\u9177\u7c73, 1173:PPTV, 1172:\u805a\u529b, 1171:CNTV, 1170:\u641c\u72d0, 1169:\u571f\u8c46, 1167:\u66b4\u98ce, 1166:\u8292\u679cTV, 1165:\u8292\u679c, 1164:\u4e50\u89c6, 1163:\u98ce\u884c, 1162:\u54d4\u54e9\u54d4\u54e9, 1161:\u6211\u4e50, 1160:\u7231\u5947\u827a, 1159:\u534e\u6570, 1158:\u817e\u8baf, 1157:\u4f18\u9177, 1150:\u66b4\u98ce, 1149:\u7231\u5947\u827a, 1148:\u534e\u6570, 1147:PPTV, 1146:\u641c\u72d0, 1145:\u7535\u5f71\u7f51, 1144:\u4e50\u89c6, 1143:\u98ce\u884c, 1142:\u8292\u679cTV, 1141:\u6211\u4e50, 1140:\u817e\u8baf, 1139:\u9177\u7c73, 1137:\u8292\u679c, 1136:\u54d4\u54e9\u54d4\u54e9, 1135:\u4f18\u9177, 1134:CCTV, 1133:\u805a\u529b, 1132:\u571f\u8c46]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/cartoon-sources",
+                "routeMapIgnoreAll": false
+            },
+            "Cartoon\/Torrent": {
+                "sort": 0,
+                "name": "Cartoon\/Torrent",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "typeId": {
+                                    "type": "int|null",
+                                    "name": "typeId",
+                                    "comment": "\u79cd\u5b50\u7c7b\u578bID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u79cd\u5b50\u8d44\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/cartoon-torrents\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "typeId": {
+                                    "type": "int",
+                                    "name": "typeId",
+                                    "comment": "\u89c6\u9891\u8d44\u6e90\u7c7b\u578b"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7ad9\u70b9ID"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "name": "title",
+                                    "comment": ""
+                                },
+                                "sort": {
+                                    "type": "int|null",
+                                    "name": "sort",
+                                    "comment": ""
+                                },
+                                "volume": {
+                                    "type": "int|null",
+                                    "name": "volume",
+                                    "comment": "\u4f53\u79ef\uff0c\u5355\u4f4dMB"
+                                },
+                                "resolving": {
+                                    "type": "int|null",
+                                    "name": "resolving",
+                                    "comment": "\u6e05\u6670\u5ea6"
+                                },
+                                "isEffective": {
+                                    "type": "int|null",
+                                    "name": "isEffective",
+                                    "comment": "\u662f\u5426\u6709\u6548"
+                                },
+                                "username": {
+                                    "type": "string|null",
+                                    "name": "username",
+                                    "comment": ""
+                                },
+                                "password": {
+                                    "type": "string|null",
+                                    "name": "password",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string|null",
+                                    "name": "url",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/cartoon-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/cartoon-torrents",
+                "routeMapIgnoreAll": false
+            },
+            "Category\/Index": {
+                "sort": 0,
+                "name": "Category\/Index",
+                "brief": null,
+                "description": "\u680f\u76ee\u7efc\u5408\u7ba1\u7406",
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "pid": {
+                                    "type": "null|int",
+                                    "name": "pid",
+                                    "comment": "\u7236\u680f\u76eeID"
+                                },
+                                "name": {
+                                    "type": "null|string",
+                                    "name": "name",
+                                    "comment": "\u680f\u76ee\u540d\u79f0"
+                                },
+                                "names": {
+                                    "type": "null|string",
+                                    "name": "names",
+                                    "comment": "\u6279\u91cf\u67e5\u8be2\u680f\u76ee\u540d\u79f0"
+                                },
+                                "mark": {
+                                    "type": "null|string",
+                                    "name": "mark",
+                                    "comment": "\u680f\u76ee\u6807\u8bc6\u7b26"
+                                },
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": "\u680f\u76ee\u5217\u8868\u9875\u6570"
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": "\u6bcf\u9875\u67e5\u8be2\u6570\u91cf\uff0c1~50\uff0c\u9ed8\u8ba410"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/categories",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u680f\u76eeID\uff0c\u591a\u4e2a\u4ee5\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/categories\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "pid": {
+                                    "type": "int",
+                                    "name": "pid",
+                                    "comment": "\u7236\u680f\u76eeID"
+                                },
+                                "asid": {
+                                    "type": "int|null",
+                                    "name": "asid",
+                                    "comment": "\u6307\u5411\u680f\u76eeID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u680f\u76ee\u540d\u79f0"
+                                },
+                                "mark": {
+                                    "type": "string|null",
+                                    "name": "mark",
+                                    "comment": "\u680f\u76ee\u6807\u8bc6\u7b26\uff08\u540c\u4e00\u7236\u680f\u76ee\u4e0b\u5fc5\u987b\u552f\u4e00\uff09"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/categories",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "PID: [1:\u89c6\u9891\u7c7b\u578b, 2:\u89c6\u9891\u5730\u57df, 4:\u8d44\u6e90\u7ad9\u70b9, 5:\u4e0b\u8f7d\u7c7b\u578b, 3:\u89c6\u9891\u8bed\u8a00]"
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u680f\u76eeID"
+                                }
+                            },
+                            "bodyParams": {
+                                "pid": {
+                                    "type": "int",
+                                    "name": "pid",
+                                    "comment": "\u7236\u680f\u76eeID"
+                                },
+                                "asid": {
+                                    "type": "int|null",
+                                    "name": "asid",
+                                    "comment": "\u6307\u5411\u680f\u76eeID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u680f\u76ee\u540d\u79f0"
+                                },
+                                "mark": {
+                                    "type": "string|null",
+                                    "name": "mark",
+                                    "comment": "\u680f\u76ee\u6807\u8bc6\u7b26\uff08\u540c\u4e00\u7236\u680f\u76ee\u4e0b\u5fc5\u987b\u552f\u4e00\uff09"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                },
+                                "updated": {
+                                    "type": "int|null",
+                                    "name": "updated",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/categories\/{id}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "PID: [1:\u89c6\u9891\u7c7b\u578b, 2:\u89c6\u9891\u5730\u57df, 4:\u8d44\u6e90\u7ad9\u70b9, 5:\u4e0b\u8f7d\u7c7b\u578b, 3:\u89c6\u9891\u8bed\u8a00]"
+                        },
+                        "Caches": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": null,
+                            "pattern": "\/caches",
+                            "uri": "\/categories\/caches",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Caches']",
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/categories",
+                "routeMapIgnoreAll": false
+            },
+            "Celebrity\/Index": {
+                "sort": 0,
+                "name": "Celebrity\/Index",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "celebrityId": {
+                                    "type": "int|null",
+                                    "name": "celebrityId",
+                                    "comment": "\u540d\u4ebaID"
+                                },
+                                "name": {
+                                    "type": "string|null",
+                                    "name": "name",
+                                    "comment": "\u59d3\u540d"
+                                },
+                                "sex": {
+                                    "type": "int|null",
+                                    "name": "sex",
+                                    "comment": "\u6027\u522b"
+                                },
+                                "born": {
+                                    "type": "date|null",
+                                    "name": "born",
+                                    "comment": "\u51fa\u751f\u65e5\u671f"
+                                },
+                                "constellation": {
+                                    "type": "int|null",
+                                    "name": "constellation",
+                                    "comment": "\u661f\u5ea7"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": "\u5206\u9875\u9875\u7801"
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100"
+                                },
+                                "order": {
+                                    "type": "int|null",
+                                    "name": "order",
+                                    "comment": "\u6392\u5e8f\u65b9\u5f0f\uff0c\u9ed8\u8ba4\u4e3a0:ID\u5012\u5e8f"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/celebrities",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "sex: [0:\u672a\u8bbe\u7f6e, 1:\u7537, 2:\u5973]; order: [0:ID\u5012\u5e8f, 1:ID\u6b63\u5e8f]<br>constellation: [1:\u5b9d\u74f6\u5ea7, 2:\u53cc\u9c7c\u5ea7, 3:\u767d\u7f8a\u5ea7, 4:\u91d1\u725b\u5ea7, 5:\u53cc\u5b50\u5ea7, 6:\u5de8\u87f9\u5ea7, 7:\u72ee\u5b50\u5ea7, 8:\u5904\u5973\u5ea7, 9:\u5929\u79e4\u5ea7, 10:\u5929\u874e\u5ea7, 11:\u5c04\u624b\u5ea7, 12:\u6469\u7faf\u5ea7]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u660e\u661fID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/celebrities\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u59d3\u540d"
+                                },
+                                "sex": {
+                                    "type": "int",
+                                    "name": "sex",
+                                    "comment": "\u6027\u522b"
+                                },
+                                "born": {
+                                    "type": "date|null",
+                                    "name": "born",
+                                    "comment": "\u51fa\u751f\u65e5\u671f"
+                                },
+                                "constellation": {
+                                    "type": "int|null",
+                                    "name": "constellation",
+                                    "comment": "\u661f\u5ea7"
+                                },
+                                "profile": {
+                                    "type": "string|null",
+                                    "name": "profile",
+                                    "comment": "\u804c\u4e1a"
+                                },
+                                "birthplace": {
+                                    "type": "string|null",
+                                    "name": "birthplace",
+                                    "comment": "\u51fa\u751f\u5730"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u8c46\u74e3ID"
+                                },
+                                "imdb": {
+                                    "type": "int|null",
+                                    "name": "imdb",
+                                    "comment": "IMDB-ID"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/celebrities",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u6027\u522b: [0:\u672a\u8bbe\u7f6e, 1:\u7537, 2:\u5973]<br>\u661f\u5ea7: [1:\u5b9d\u74f6\u5ea7, 2:\u53cc\u9c7c\u5ea7, 3:\u767d\u7f8a\u5ea7, 4:\u91d1\u725b\u5ea7, 5:\u53cc\u5b50\u5ea7, 6:\u5de8\u87f9\u5ea7, 7:\u72ee\u5b50\u5ea7, 8:\u5904\u5973\u5ea7, 9:\u5929\u79e4\u5ea7, 10:\u5929\u874e\u5ea7, 11:\u5c04\u624b\u5ea7, 12:\u6469\u7faf\u5ea7]"
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u540d\u4ebaID"
+                                }
+                            },
+                            "bodyParams": {
+                                "born": {
+                                    "type": "date|null",
+                                    "name": "born",
+                                    "comment": "\u51fa\u751f\u65e5\u671f"
+                                },
+                                "constellation": {
+                                    "type": "int|null",
+                                    "name": "constellation",
+                                    "comment": "\u661f\u5ea7\uff0c\u82e5\u4e3a\u7a7a\u4f46\u6709\u8bbe\u7f6e\u51fa\u751f\u65e5\u671f\u5c06\u81ea\u52a8\u8ba1\u7b97"
+                                },
+                                "sex": {
+                                    "type": "int|null",
+                                    "name": "sex",
+                                    "comment": "\u6027\u522b"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u8c46\u74e3ID"
+                                },
+                                "imdb": {
+                                    "type": "int|null",
+                                    "name": "imdb",
+                                    "comment": "IMDB-ID"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u59d3\u540d"
+                                },
+                                "profile": {
+                                    "type": "string|null",
+                                    "name": "profile",
+                                    "comment": "\u804c\u4e1a"
+                                },
+                                "birthplace": {
+                                    "type": "string|null",
+                                    "name": "birthplace",
+                                    "comment": "\u51fa\u751f\u5730"
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/celebrities\/{id}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u6027\u522b: [0:\u672a\u8bbe\u7f6e, 1:\u7537, 2:\u5973]<br>\u661f\u5ea7: [1:\u5b9d\u74f6\u5ea7, 2:\u53cc\u9c7c\u5ea7, 3:\u767d\u7f8a\u5ea7, 4:\u91d1\u725b\u5ea7, 5:\u53cc\u5b50\u5ea7, 6:\u5de8\u87f9\u5ea7, 7:\u72ee\u5b50\u5ea7, 8:\u5904\u5973\u5ea7, 9:\u5929\u79e4\u5ea7, 10:\u5929\u874e\u5ea7, 11:\u5c04\u624b\u5ea7, 12:\u6469\u7faf\u5ea7]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/celebrities",
+                "routeMapIgnoreAll": false
+            },
+            "Celebrity\/Mapping": {
+                "sort": 0,
+                "name": "Celebrity\/Mapping",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u7ad9\u70b9ID"
+                                },
+                                "mappingId": {
+                                    "type": "int|null",
+                                    "name": "mappingId",
+                                    "comment": "\u6620\u5c04\u7ad9\u70b9\u5bf9\u5e94ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": "\u5206\u9875\u9875\u7801"
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100"
+                                },
+                                "order": {
+                                    "type": "int|null",
+                                    "name": "order",
+                                    "comment": "\u6392\u5e8f\u65b9\u5f0f\uff0c\u9ed8\u8ba4\u4e3a0:ID\u5012\u5e8f"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/celebrity-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]<br>order: [0:ID\u5012\u5e8f, 1:ID\u6b63\u5e8f]"
+                        },
+                        "NoCovers": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "start": {
+                                    "type": "int",
+                                    "name": "start",
+                                    "comment": "\u8d77\u59cb\u8bb0\u5f55\u884cID(\u4e0d\u5305\u542b\u8be5\u8bb0\u5f55\uff0cid > start)"
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100\u4e4b\u95f4"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": "\/nocovers",
+                            "uri": "\/celebrity-mappings\/nocovers",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'NoCovers']",
+                            "description": "\u67e5\u8be2\u6ca1\u6709\u5934\u50cf\u7684\u6620\u5c04\u8bb0\u5f55\u5217\u8868<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "celebrityId": {
+                                    "type": "int",
+                                    "name": "celebrityId",
+                                    "comment": ""
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7ad9\u70b9ID"
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u5bf9\u5e94\u7684\u91c7\u96c6\u7ad9\u70b9\u89c6\u9891ID"
+                                },
+                                "cover": {
+                                    "type": "string",
+                                    "name": "cover",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "name": "url",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                },
+                                "updated": {
+                                    "type": "int|null",
+                                    "name": "updated",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/celebrity-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    },
+                    "PATCH": {
+                        "Cover": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u6620\u5c04\u8bb0\u5f55ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "cover": {
+                                    "type": "string",
+                                    "name": "cover",
+                                    "comment": "\u5b8c\u6574\u7684\u5c01\u9762\u56fe\u94fe\u63a5"
+                                }
+                            },
+                            "pattern": "\/{id}\/cover",
+                            "uri": "\/celebrity-mappings\/{id}\/cover",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Cover']",
+                            "description": "\u66f4\u65b0\u540d\u4eba\u6620\u5c04\u8bb0\u5f55\u7684\u5c01\u9762\u56fe\u94fe\u63a5"
+                        }
+                    }
+                },
+                "uriPrefix": "\/celebrity-mappings",
+                "routeMapIgnoreAll": false
+            },
+            "Movie\/Index": {
+                "sort": 0,
+                "name": "Movie\/Index",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100\u4e4b\u95f4"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movies",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u83b7\u53d6\u89c6\u9891\u5217\u8868"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u6700\u591a20\u4e2a"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/movies\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": "\u83b7\u53d6\u6307\u5b9a\u4e00\u6761\u6216\u591a\u6761\u89c6\u9891\u4fe1\u606f"
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "regionNames": {
+                                    "type": "string",
+                                    "name": "regionNames",
+                                    "comment": "\u5730\u533a\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypeNames": {
+                                    "type": "string",
+                                    "name": "subtypeNames",
+                                    "comment": "\u89c6\u9891\u5206\u7c7b\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "celebrities": {
+                                    "type": "string|null",
+                                    "name": "celebrities",
+                                    "comment": "\u89c6\u9891\u6f14\u5458\u3001\u5bfc\u6f14\u3001\u7f16\u5267ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0ccelebrityId-type"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u89c6\u9891\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u5206\u949f"
+                                },
+                                "imdb": {
+                                    "type": "int|null",
+                                    "name": "imdb",
+                                    "comment": "\u89c6\u9891\u5728IMDB\u7684ID"
+                                },
+                                "imdbRate": {
+                                    "type": "int|null",
+                                    "name": "imdbRate",
+                                    "comment": "\u89c6\u9891\u5728IMDB\u7684\u8bc4\u5206"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movies",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b:[1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u89c6\u9891\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u5206\u949f"
+                                },
+                                "imdb": {
+                                    "type": "int|null",
+                                    "name": "imdb",
+                                    "comment": "\u89c6\u9891\u5728IMDB\u7684ID"
+                                },
+                                "imdbRate": {
+                                    "type": "int|null",
+                                    "name": "imdbRate",
+                                    "comment": "\u89c6\u9891\u5728IMDB\u7684\u8bc4\u5206"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/movies\/{id}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/([0-9,]+)$\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        },
+                        "Imports": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9\u7684\u89c6\u9891ID"
+                                },
+                                "json": {
+                                    "type": "text",
+                                    "name": "json",
+                                    "comment": "\u91c7\u96c6\u6570\u636eJSON\u683c\u5f0f\u5316\u540e\u7684\u5b57\u7b26\u4e32"
+                                }
+                            },
+                            "pattern": "\/imports",
+                            "uri": "\/movies\/imports",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Imports']",
+                            "description": null
+                        }
+                    },
+                    "PATCH": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "about": {
+                                    "type": "string",
+                                    "name": "about",
+                                    "comment": "\u64cd\u4f5c\u7684\u5c5e\u6027"
+                                },
+                                "aboutIds": {
+                                    "type": "string",
+                                    "name": "aboutIds",
+                                    "comment": "\u5c5e\u6027ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": {
+                                "do": {
+                                    "type": "string",
+                                    "name": "do",
+                                    "comment": "\u5c5e\u6027\u64cd\u4f5c\u65b9\u5f0f"
+                                }
+                            },
+                            "pattern": "\/{id}\/{about}\/{aboutIds}",
+                            "uri": "\/movies\/{id}\/{about}\/{aboutIds}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/(\\d+)\\\/(regions|subtypes|celebrities)\\\/([0-9-,%2C]+)\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "about: [celebrities]; \u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];<br>\u5c5e\u6027ID\u683c\u5f0f: celebrityId-type; do: [attach|detach];"
+                        },
+                        "Sources": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "isWatchable": {
+                                    "type": "int",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u53ef\u4ee5\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426VIP\u53ef\u770b"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u8fde\u7eed\u5267\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u66f4\u65b0\u5230\u8fde\u7eed\u5267\u7684\u7b2c\u51e0\u96c6"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u8fde\u7eed\u5267\u7684\u603b\u96c6\u6570"
+                                }
+                            },
+                            "pattern": "\/{id}\/sources",
+                            "uri": "\/movies\/{id}\/sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Sources']",
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/movies",
+                "routeMapIgnoreAll": false
+            },
+            "Movie\/Mapping": {
+                "sort": 0,
+                "name": "Movie\/Mapping",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "mappingId": {
+                                    "type": "int|null",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u6620\u5c04\u8bb0\u5f55ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u67e5\u8be2\u5217\u8868\u65f6\u4e3alist"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/movie-mappings\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/movie-mappings",
+                "routeMapIgnoreAll": false
+            },
+            "Movie\/Source": {
+                "sort": 0,
+                "name": "Movie\/Source",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u5728\u7ebf\u7247\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/movie-sources\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9ID"
+                                },
+                                "siteName": {
+                                    "type": "int|null",
+                                    "name": "siteName",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9\u540d\u79f0\uff0c\u81ea\u52a8\u8f6c\u6362ID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u6dfb\u52a0"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "name": "url",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u94fe\u63a5"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId:[1372:AcFun, 1371:\u897f\u74dc, 1370:\u57cb\u5806\u5806, 1369:\u54aa\u5495, 1138:CNTV, 1350:\u6b22\u559c\u9996\u6620, 1168:\u7535\u5f71\u7f51, 1175:CCTV, 1174:\u9177\u7c73, 1173:PPTV, 1172:\u805a\u529b, 1171:CNTV, 1170:\u641c\u72d0, 1169:\u571f\u8c46, 1167:\u66b4\u98ce, 1166:\u8292\u679cTV, 1165:\u8292\u679c, 1164:\u4e50\u89c6, 1163:\u98ce\u884c, 1162:\u54d4\u54e9\u54d4\u54e9, 1161:\u6211\u4e50, 1160:\u7231\u5947\u827a, 1159:\u534e\u6570, 1158:\u817e\u8baf, 1157:\u4f18\u9177, 1150:\u66b4\u98ce, 1149:\u7231\u5947\u827a, 1148:\u534e\u6570, 1147:PPTV, 1146:\u641c\u72d0, 1145:\u7535\u5f71\u7f51, 1144:\u4e50\u89c6, 1143:\u98ce\u884c, 1142:\u8292\u679cTV, 1141:\u6211\u4e50, 1140:\u817e\u8baf, 1139:\u9177\u7c73, 1137:\u8292\u679c, 1136:\u54d4\u54e9\u54d4\u54e9, 1135:\u4f18\u9177, 1134:CCTV, 1133:\u805a\u529b, 1132:\u571f\u8c46]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/movie-sources",
+                "routeMapIgnoreAll": false
+            },
+            "Movie\/Torrent": {
+                "sort": 0,
+                "name": "Movie\/Torrent",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "typeId": {
+                                    "type": "int|null",
+                                    "name": "typeId",
+                                    "comment": "\u79cd\u5b50\u7c7b\u578bID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u79cd\u5b50\u8d44\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/movie-torrents\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "typeId": {
+                                    "type": "int",
+                                    "name": "typeId",
+                                    "comment": "\u89c6\u9891\u8d44\u6e90\u7c7b\u578b"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7ad9\u70b9ID"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "name": "title",
+                                    "comment": ""
+                                },
+                                "sort": {
+                                    "type": "int|null",
+                                    "name": "sort",
+                                    "comment": ""
+                                },
+                                "volume": {
+                                    "type": "int|null",
+                                    "name": "volume",
+                                    "comment": "\u4f53\u79ef\uff0c\u5355\u4f4dMB"
+                                },
+                                "resolving": {
+                                    "type": "int|null",
+                                    "name": "resolving",
+                                    "comment": "\u6e05\u6670\u5ea6"
+                                },
+                                "isEffective": {
+                                    "type": "int|null",
+                                    "name": "isEffective",
+                                    "comment": "\u662f\u5426\u6709\u6548"
+                                },
+                                "username": {
+                                    "type": "string|null",
+                                    "name": "username",
+                                    "comment": ""
+                                },
+                                "password": {
+                                    "type": "string|null",
+                                    "name": "password",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string|null",
+                                    "name": "url",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/movie-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/movie-torrents",
+                "routeMapIgnoreAll": false
+            },
+            "Tv\/Index": {
+                "sort": 0,
+                "name": "Tv\/Index",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": "\u5206\u9875\u6bcf\u9875\u6570\u91cf\uff0c1~100\u4e4b\u95f4"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tvs",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u83b7\u53d6\u89c6\u9891\u5217\u8868"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u6700\u591a20\u4e2a"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tvs\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": "\u83b7\u53d6\u6307\u5b9a\u4e00\u6761\u6216\u591a\u6761\u89c6\u9891\u4fe1\u606f"
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "regionNames": {
+                                    "type": "string",
+                                    "name": "regionNames",
+                                    "comment": "\u5730\u533a\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypeNames": {
+                                    "type": "string",
+                                    "name": "subtypeNames",
+                                    "comment": "\u89c6\u9891\u5206\u7c7b\u540d\u79f0\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u5c06\u81ea\u52a8\u8f6c\u6362\u4e3aID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u65b0\u589e"
+                                },
+                                "celebrities": {
+                                    "type": "string|null",
+                                    "name": "celebrities",
+                                    "comment": "\u89c6\u9891\u6f14\u5458\u3001\u5bfc\u6f14\u3001\u7f16\u5267ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0ccelebrityId-type"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u89c6\u9891\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u5206\u949f"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u603b\u96c6\u6570"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u5f53\u524d\u66f4\u65b0\u5230\u7684\u96c6\u6570"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tvs",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b:[1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "name": {
+                                    "type": "string",
+                                    "name": "name",
+                                    "comment": "\u89c6\u9891\u540d\u79f0"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "name": "alias",
+                                    "comment": "\u89c6\u9891\u522b\u540d\u3001\u8bd1\u540d\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "language": {
+                                    "type": "string|null",
+                                    "name": "language",
+                                    "comment": "\u89c6\u9891\u8bed\u79cd\uff08\u56fd\u8bed\u3001\u7ca4\u8bed\u3001\u82f1\u8bed\u7b49\uff09\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "year": {
+                                    "type": "year",
+                                    "name": "year",
+                                    "comment": "\u4e0a\u6620\u5e74\u4efd"
+                                },
+                                "released": {
+                                    "type": "date|null",
+                                    "name": "released",
+                                    "comment": "\u4e0a\u6620\u65e5\u671f"
+                                },
+                                "regions": {
+                                    "type": "string",
+                                    "name": "regions",
+                                    "comment": "\u5730\u533aID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "subtypes": {
+                                    "type": "string",
+                                    "name": "subtypes",
+                                    "comment": "\u89c6\u9891\u5206\u7c7bID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "isClassic": {
+                                    "type": "int|null",
+                                    "name": "isClassic",
+                                    "comment": "\u662f\u5426\u8c46\u74e3\u7ecf\u5178"
+                                },
+                                "isWatchable": {
+                                    "type": "int|null",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u80fd\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int|null",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426\u6536\u8d39\u89c2\u770b"
+                                },
+                                "views": {
+                                    "type": "int|null",
+                                    "name": "views",
+                                    "comment": "\u8be6\u60c5\u9875\u67e5\u770b\u6b21\u6570"
+                                },
+                                "duration": {
+                                    "type": "int|null",
+                                    "name": "duration",
+                                    "comment": "\u89c6\u9891\u65f6\u957f\uff0c\u5355\u4f4d\uff1a\u5206\u949f"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u603b\u96c6\u6570"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u5f53\u524d\u66f4\u65b0\u5230\u7684\u96c6\u6570"
+                                },
+                                "douban": {
+                                    "type": "int|null",
+                                    "name": "douban",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684ID"
+                                },
+                                "doubanRate": {
+                                    "type": "int|null",
+                                    "name": "doubanRate",
+                                    "comment": "\u89c6\u9891\u5728\u8c46\u74e3\u7684\u8bc4\u5206"
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": "\u89c6\u9891\u8bb0\u5f55\u6dfb\u52a0\u7684\u65f6\u95f4\u6233"
+                                },
+                                "description": {
+                                    "type": "text|null",
+                                    "name": "description",
+                                    "comment": "\u89c6\u9891\u7b80\u4ecb"
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/tvs\/{id}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/([0-9,]+)$\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "\u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];"
+                        },
+                        "Imports": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9\u7684\u89c6\u9891ID"
+                                },
+                                "json": {
+                                    "type": "text",
+                                    "name": "json",
+                                    "comment": "\u91c7\u96c6\u6570\u636eJSON\u683c\u5f0f\u5316\u540e\u7684\u5b57\u7b26\u4e32"
+                                }
+                            },
+                            "pattern": "\/imports",
+                            "uri": "\/tvs\/imports",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Imports']",
+                            "description": null
+                        }
+                    },
+                    "PATCH": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "about": {
+                                    "type": "string",
+                                    "name": "about",
+                                    "comment": "\u64cd\u4f5c\u7684\u5c5e\u6027"
+                                },
+                                "aboutIds": {
+                                    "type": "string",
+                                    "name": "aboutIds",
+                                    "comment": "\u5c5e\u6027ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": {
+                                "do": {
+                                    "type": "string",
+                                    "name": "do",
+                                    "comment": "\u5c5e\u6027\u64cd\u4f5c\u65b9\u5f0f"
+                                }
+                            },
+                            "pattern": "\/{id}\/{about}\/{aboutIds}",
+                            "uri": "\/tvs\/{id}\/{about}\/{aboutIds}",
+                            "routeMatch": "\/^_URI_PREFIX_\\\/(\\d+)\\\/(regions|subtypes|celebrities)\\\/([0-9-,%2C]+)\/",
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "about: [celebrities]; \u540d\u4eba\u7c7b\u578b: [1:\u6f14\u5458, 2:\u7f16\u5267, 3:\u5bfc\u6f14];<br>\u5c5e\u6027ID\u683c\u5f0f: celebrityId-type; do: [attach|detach];"
+                        },
+                        "Sources": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "isWatchable": {
+                                    "type": "int",
+                                    "name": "isWatchable",
+                                    "comment": "\u662f\u5426\u53ef\u4ee5\u5728\u7ebf\u89c2\u770b"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": "\u662f\u5426VIP\u53ef\u770b"
+                                },
+                                "isFinal": {
+                                    "type": "int|null",
+                                    "name": "isFinal",
+                                    "comment": "\u8fde\u7eed\u5267\u662f\u5426\u5b8c\u7ed3"
+                                },
+                                "episodeCurr": {
+                                    "type": "int|null",
+                                    "name": "episodeCurr",
+                                    "comment": "\u66f4\u65b0\u5230\u8fde\u7eed\u5267\u7684\u7b2c\u51e0\u96c6"
+                                },
+                                "episodeTotal": {
+                                    "type": "int|null",
+                                    "name": "episodeTotal",
+                                    "comment": "\u8fde\u7eed\u5267\u7684\u603b\u96c6\u6570"
+                                }
+                            },
+                            "pattern": "\/{id}\/sources",
+                            "uri": "\/tvs\/{id}\/sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Sources']",
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/tvs",
+                "routeMapIgnoreAll": false
+            },
+            "Tv\/Mapping": {
+                "sort": 0,
+                "name": "Tv\/Mapping",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "mappingId": {
+                                    "type": "int|null",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u6620\u5c04\u8bb0\u5f55ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694\uff0c\u67e5\u8be2\u5217\u8868\u65f6\u4e3alist"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tv-mappings\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "mappingId": {
+                                    "type": "int",
+                                    "name": "mappingId",
+                                    "comment": "\u89c6\u9891\u5728\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-mappings",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/tv-mappings",
+                "routeMapIgnoreAll": false
+            },
+            "Tv\/Period": {
+                "sort": 0,
+                "name": "Tv\/Period",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "page": {
+                                    "type": "int",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-periods",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tv-periods\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "monday": {
+                                    "type": "int|null",
+                                    "name": "monday",
+                                    "comment": ""
+                                },
+                                "tuesday": {
+                                    "type": "int|null",
+                                    "name": "tuesday",
+                                    "comment": ""
+                                },
+                                "wednesday": {
+                                    "type": "int|null",
+                                    "name": "wednesday",
+                                    "comment": ""
+                                },
+                                "thursday": {
+                                    "type": "int|null",
+                                    "name": "thursday",
+                                    "comment": ""
+                                },
+                                "friday": {
+                                    "type": "int|null",
+                                    "name": "friday",
+                                    "comment": ""
+                                },
+                                "saturday": {
+                                    "type": "int|null",
+                                    "name": "saturday",
+                                    "comment": ""
+                                },
+                                "sunday": {
+                                    "type": "int|null",
+                                    "name": "sunday",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-periods",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    },
+                    "PUT": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "id": {
+                                    "type": "int",
+                                    "name": "id",
+                                    "comment": "\u89c6\u9891ID"
+                                }
+                            },
+                            "bodyParams": {
+                                "monday": {
+                                    "type": "int|null",
+                                    "name": "monday",
+                                    "comment": ""
+                                },
+                                "tuesday": {
+                                    "type": "int|null",
+                                    "name": "tuesday",
+                                    "comment": ""
+                                },
+                                "wednesday": {
+                                    "type": "int|null",
+                                    "name": "wednesday",
+                                    "comment": ""
+                                },
+                                "thursday": {
+                                    "type": "int|null",
+                                    "name": "thursday",
+                                    "comment": ""
+                                },
+                                "friday": {
+                                    "type": "int|null",
+                                    "name": "friday",
+                                    "comment": ""
+                                },
+                                "saturday": {
+                                    "type": "int|null",
+                                    "name": "saturday",
+                                    "comment": ""
+                                },
+                                "sunday": {
+                                    "type": "int|null",
+                                    "name": "sunday",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                },
+                                "updated": {
+                                    "type": "int|null",
+                                    "name": "updated",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": "\/{id}",
+                            "uri": "\/tv-periods\/{id}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    },
+                    "DELETE": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u89c6\u9891ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tv-periods\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": null
+                        }
+                    }
+                },
+                "uriPrefix": "\/tv-periods",
+                "routeMapIgnoreAll": false
+            },
+            "Tv\/Source": {
+                "sort": 0,
+                "name": "Tv\/Source",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u5728\u7ebf\u7247\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tv-sources\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": [],
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9ID"
+                                },
+                                "siteName": {
+                                    "type": "int|null",
+                                    "name": "siteName",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u7f51\u7ad9\u540d\u79f0\uff0c\u81ea\u52a8\u8f6c\u6362ID\uff0c\u82e5\u4e0d\u5b58\u5728\u5219\u81ea\u52a8\u6dfb\u52a0"
+                                },
+                                "isVip": {
+                                    "type": "int",
+                                    "name": "isVip",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "name": "url",
+                                    "comment": "\u5728\u7ebf\u8d44\u6e90\u94fe\u63a5"
+                                },
+                                "episode": {
+                                    "type": "int",
+                                    "name": "episode",
+                                    "comment": "\u5f53\u524d\u96c6\u6570"
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-sources",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "siteId:[1372:AcFun, 1371:\u897f\u74dc, 1370:\u57cb\u5806\u5806, 1369:\u54aa\u5495, 1138:CNTV, 1350:\u6b22\u559c\u9996\u6620, 1168:\u7535\u5f71\u7f51, 1175:CCTV, 1174:\u9177\u7c73, 1173:PPTV, 1172:\u805a\u529b, 1171:CNTV, 1170:\u641c\u72d0, 1169:\u571f\u8c46, 1167:\u66b4\u98ce, 1166:\u8292\u679cTV, 1165:\u8292\u679c, 1164:\u4e50\u89c6, 1163:\u98ce\u884c, 1162:\u54d4\u54e9\u54d4\u54e9, 1161:\u6211\u4e50, 1160:\u7231\u5947\u827a, 1159:\u534e\u6570, 1158:\u817e\u8baf, 1157:\u4f18\u9177, 1150:\u66b4\u98ce, 1149:\u7231\u5947\u827a, 1148:\u534e\u6570, 1147:PPTV, 1146:\u641c\u72d0, 1145:\u7535\u5f71\u7f51, 1144:\u4e50\u89c6, 1143:\u98ce\u884c, 1142:\u8292\u679cTV, 1141:\u6211\u4e50, 1140:\u817e\u8baf, 1139:\u9177\u7c73, 1137:\u8292\u679c, 1136:\u54d4\u54e9\u54d4\u54e9, 1135:\u4f18\u9177, 1134:CCTV, 1133:\u805a\u529b, 1132:\u571f\u8c46]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/tv-sources",
+                "routeMapIgnoreAll": false
+            },
+            "Tv\/Torrent": {
+                "sort": 0,
+                "name": "Tv\/Torrent",
+                "brief": null,
+                "description": null,
+                "methods": {
+                    "GET": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int|null",
+                                    "name": "videoId",
+                                    "comment": "\u89c6\u9891ID"
+                                },
+                                "siteId": {
+                                    "type": "int|null",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7f51\u7ad9ID"
+                                },
+                                "typeId": {
+                                    "type": "int|null",
+                                    "name": "typeId",
+                                    "comment": "\u79cd\u5b50\u7c7b\u578bID"
+                                },
+                                "page": {
+                                    "type": "int|null",
+                                    "name": "page",
+                                    "comment": ""
+                                },
+                                "size": {
+                                    "type": "int|null",
+                                    "name": "size",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        },
+                        "Ids": {
+                            "routeMapIgnore": false,
+                            "uriParams": {
+                                "ids": {
+                                    "type": "string",
+                                    "name": "ids",
+                                    "comment": "\u79cd\u5b50\u8d44\u6e90ID\uff0c\u591a\u4e2a\u9017\u53f7\u5206\u9694"
+                                }
+                            },
+                            "bodyParams": null,
+                            "pattern": "\/{ids}",
+                            "uri": "\/tv-torrents\/{ids}",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": "['_do'=>'Ids']",
+                            "description": null
+                        }
+                    },
+                    "POST": {
+                        "Default": {
+                            "routeMapIgnore": false,
+                            "uriParams": null,
+                            "bodyParams": {
+                                "videoId": {
+                                    "type": "int",
+                                    "name": "videoId",
+                                    "comment": ""
+                                },
+                                "typeId": {
+                                    "type": "int",
+                                    "name": "typeId",
+                                    "comment": "\u89c6\u9891\u8d44\u6e90\u7c7b\u578b"
+                                },
+                                "siteId": {
+                                    "type": "int",
+                                    "name": "siteId",
+                                    "comment": "\u91c7\u96c6\u7ad9\u70b9ID"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "name": "title",
+                                    "comment": ""
+                                },
+                                "sort": {
+                                    "type": "int|null",
+                                    "name": "sort",
+                                    "comment": ""
+                                },
+                                "volume": {
+                                    "type": "int|null",
+                                    "name": "volume",
+                                    "comment": "\u4f53\u79ef\uff0c\u5355\u4f4dMB"
+                                },
+                                "resolving": {
+                                    "type": "int|null",
+                                    "name": "resolving",
+                                    "comment": "\u6e05\u6670\u5ea6"
+                                },
+                                "isEffective": {
+                                    "type": "int|null",
+                                    "name": "isEffective",
+                                    "comment": "\u662f\u5426\u6709\u6548"
+                                },
+                                "username": {
+                                    "type": "string|null",
+                                    "name": "username",
+                                    "comment": ""
+                                },
+                                "password": {
+                                    "type": "string|null",
+                                    "name": "password",
+                                    "comment": ""
+                                },
+                                "url": {
+                                    "type": "string|null",
+                                    "name": "url",
+                                    "comment": ""
+                                },
+                                "created": {
+                                    "type": "int|null",
+                                    "name": "created",
+                                    "comment": ""
+                                }
+                            },
+                            "pattern": ".\/",
+                            "uri": "\/tv-torrents",
+                            "routeMatch": null,
+                            "routeMatchParamsIndex": null,
+                            "routeNativeParams": null,
+                            "description": "typeId: [1156:\u897f\u74dc, 1155:\u7535\u9a74, 1154:\u4e91\u64ad, 1153:\u767e\u5ea6\u4e91, 1152:\u78c1\u529b, 1151:\u8fc5\u96f7];<br>siteId: [1:\u8c46\u74e3, 2:2345]"
+                        }
+                    }
+                },
+                "uriPrefix": "\/tv-torrents",
+                "routeMapIgnoreAll": false
+            }
+        }
+    }
+}
