@@ -121,8 +121,10 @@ npm run serve
 ```shell
 # 复制 vue.config-example.js 并命名为 vue.config.js
 # 然后修改文件中的路径和测试的IP和端口等相关配置为本地环境的配置
-mv vue.config-example.js vue.config.js
+cp vue.config-example.js vue.config.js
+
 npm run build
+
 # 打包生成生产环境并输出到指定目录后，
 # 复制 callbacks.example.js 更改名称为 callbacks.example.js
 # 该文件中可以配置自定义的接口发送请求和响应回调的处理方法
