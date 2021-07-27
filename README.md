@@ -32,8 +32,8 @@ https://xxx.com/video-api/v1
 ```
 
 ### 接口列表的数据结构
-> 地址：https://xxx.com/video-api/v1/apis
-  参考：`public/demo/apis.json`
+> 地址：https://xxx.com/video-api/v1/apis  
+  参考：`public/demo/apis.json`  
 
 ```json
 {
